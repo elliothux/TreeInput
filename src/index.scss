@@ -1,0 +1,22 @@
+
+.tree-input {
+  border-left: 1px solid gray;
+  margin-left: 10px;
+  .tree-input-start, .tree-input-end {
+    position: relative;
+    left: -5px;
+    background-color: white;
+  }
+  .tree-input-start {
+    .tree-input-expand {
+      position: relative;
+      left: -3px;
+    }
+  }
+  .tree-input-end {
+
+  }
+  .tree-input-items {
+    margin-left: 20px;
+  }
+}

@@ -28,14 +28,15 @@ class Input extends PureComponent {
         value: ''
     };
 
-    onChange = (e, value) => {
+    onChange = (e) => {
         const { onChange } = this.props;
+        const { value } = e.target;
         const formated = this.format(value);
         const event = { ...e, value: formated, component: this };
         onChange(event, formated);
     };
     format = (value) => {
-
+        return value;
     };
     render() {
         const { value, name, type } = this.props;
