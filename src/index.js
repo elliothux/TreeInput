@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Input from './component/Input';
+
 
 
 class TreeInput extends Component {
@@ -23,7 +25,11 @@ class TreeInput extends Component {
     render() {
         const { schema } = this.props;
         return (
-            schema.toString()
+            schema
+                .filter(i => i.type !== "message")
+                .map((i, index) => (
+                    <Input type={i.type} name={i.name} key={index} />
+                ))
         )
     }
 }
