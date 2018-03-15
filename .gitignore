@@ -57,3 +57,11 @@ typings/
 # dotenv environment variables file
 .env
 
+.idea/TreeInput.iml
+.idea/inspectionProfiles/
+.idea/modules.xml
+.idea/workspace.xml
+
+/node_modules/
+/.cache/
+/dist/
