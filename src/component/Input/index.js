@@ -41,15 +41,12 @@ class Input extends PureComponent {
     render() {
         const { value, name, type } = this.props;
         return (
-            <div className="input-item">
-                <span>{name}</span>
-                <input
-                    type="text"
-                    value={value}
-                    placeholder={`${name}: ${type}`}
-                    onChange={this.onChange}
-                />
-            </div>
+            <input
+                type="text"
+                value={value}
+                placeholder={`${name}: ${type}`}
+                onChange={this.onChange}
+            />
         )
     }
 }

@@ -87,13 +87,17 @@ class TreeInput extends Component {
             });
         };
         return (
-            <Input
-                key={name}
-                name={name}
-                type={type}
-                value={value}
-                onChange={onChange}
-            />
+            <div className="tree-input-item">
+                <span className="tree-input-item-name">{name}</span>
+                <span className="tree-input-item-name">: {type}</span>
+                <Input
+                    key={name}
+                    name={name}
+                    type={type}
+                    value={value}
+                    onChange={onChange}
+                />
+            </div>
         );
     };
     renderMessage = (node) => {
