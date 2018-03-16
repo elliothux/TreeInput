@@ -17,7 +17,7 @@ class TreeInput extends Component {
         onChange: PropTypes.func
     };
     static defaultProps = {
-        name: 'root',
+        name: 'Root',
         onChange: noop
     };
 
@@ -32,7 +32,6 @@ class TreeInput extends Component {
     };
 
     format = (value) => {
-        console.log(value);
         value = value.map(i => {
             const { name, type, label, value } = i;
             if (type === 'message') {
@@ -81,17 +80,17 @@ class TreeInput extends Component {
                 V.find(i => i === node).value = value;
                 const newValue = [...V];
                 const formated = this.format(newValue);
-                console.log(formated);
                 this.props.onChange(formated);
                 return { value: newValue };
             });
         };
         return (
-            <div className="tree-input-item">
-                <span className="tree-input-item-name">{name}</span>
-                <span className="tree-input-item-name">: {type}</span>
+            <div className="tree-input-item" key={name}>
+                <div className="tree-input-item-info">
+                    <span className="tree-input-item-name">"{name}"</span>
+                    <span className="tree-input-item-type">: {type}</span>
+                </div>
                 <Input
-                    key={name}
                     name={name}
                     type={type}
                     value={value}
@@ -123,18 +122,22 @@ class TreeInput extends Component {
                     className="tree-input-start"
                     onClick={this.handleToggleCollapsed}
                 >
-                    <img className="tree-input-expand" src={CollapsedIcon} />
-                    <span className="tree-input-name">{name}: </span>
-                    <span>{"\u007b"}</span>
-                    <span if={collapsed}> ... }</span>
+                    <img
+                        className="tree-input-expand"
+                        src={CollapsedIcon}
+                        onClick={this.handleToggleCollapsed}
+                    />
+                    <span
+                        className="tree-input-name"
+                        onClick={this.handleToggleCollapsed}
+                    >{name}: </span>
+                    <span onClick={this.handleToggleCollapsed}>{"\u007b"}</span>
+                    <span if={collapsed} onClick={this.handleToggleCollapsed}> ... }</span>
                     <span className="tree-input-count">{length} Items</span>
                 </div>
                 <div className="tree-input-items">{value.map(this.renderNode)}</div>
-                <div
-                    className="tree-input-end"
-                    onClick={this.handleToggleCollapsed}
-                >
-                    <span>{"\u007d"}</span>
+                <div className="tree-input-end">
+                    <span onClick={this.handleToggleCollapsed}>{"\u007d"}</span>
                 </div>
             </div>
         );
