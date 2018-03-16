@@ -4,19 +4,43 @@
   margin-left: 10px;
   .tree-input-start, .tree-input-end {
     position: relative;
-    left: -5px;
     background-color: white;
+    cursor: pointer;
+    height: 25px;
   }
   .tree-input-start {
+    left: -7px;
     .tree-input-expand {
+      width: 20px;
       position: relative;
       left: -3px;
+      top: 4px;
+      transition: all ease 300ms;
+    }
+    .tree-input-count {
+      display: inline-block;
+      margin-left: 20px;
+      opacity: 0.8;
+      font-style: italic;
     }
   }
   .tree-input-end {
-
+    left: -3px;
   }
   .tree-input-items {
     margin-left: 20px;
+  }
+}
+
+.tree-input.tree-input-collapsed {
+  height: 25px;
+  border-left: none;
+  .tree-input-start {
+    .tree-input-expand {
+      transform: rotate(-90deg);
+    }
+  }
+  .tree-input-items, .tree-input-end {
+    display: none;
   }
 }
