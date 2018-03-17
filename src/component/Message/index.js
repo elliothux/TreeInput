@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Input from '../Input';
 import CollapsedIcon from '../../media/collapsed.svg';
-import { noop, typesMap } from '../../utils';
+import { noop } from '../../utils';
 
 import './index.scss';
 
