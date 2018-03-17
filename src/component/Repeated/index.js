@@ -3,18 +3,22 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Input from '../Input';
-import Repeated from '../Repeated';
+import Message from '../Message';
 import CollapsedIcon from '../../media/collapsed.svg';
-import { noop } from '../../utils';
+import { noop, types } from '../../utils';
 
 import './index.scss';
 
 
 
-class Message extends Component {
+class Repeated extends Component {
     static propTypes = {
         value: PropTypes.array.isRequired,
         name: PropTypes.string.isRequired,
+        typeOrFieldInfo: PropTypes.oneOf([
+            PropTypes.oneOf(types),
+            PropTypes.array
+        ]).isRequired,
         collapsed: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]).isRequired,
         nestedDepth: PropTypes.number.isRequired,
         onChange: PropTypes.func
@@ -41,63 +45,49 @@ class Message extends Component {
         });
     };
 
-    generateOnChange = (node) => {
+    generateOnChange = (index) => {
         return (e, value) => {
             const { value: newValue } = this.props;
-            newValue.find(i => i === node).value = value;
+            newValue[index] = value;
             this.props.onChange(e, newValue);
         };
     };
-    renderInput = (node) => {
-        const { name, type, value } = node;
+    renderInput = (value, index) => {
+        const { name, typeOrFieldInfo: type } = this.props;
         return (
-            <div className="tree-input-item" key={name}>
-                <div className="tree-input-item-info">
-                    <span className="tree-input-item-name">"{name}"</span>
-                    <span className="tree-input-item-type">: {type}</span>
-                </div>
+            <div className="tree-input-item" key={index}>
                 <Input
                     name={name}
                     type={type}
                     value={value}
-                    onChange={this.generateOnChange(node)}
+                    onChange={this.generateOnChange(index)}
                 />
             </div>
         );
     };
-    renderMessage = (node) => {
-        const { fieldInfo, name } = node;
+    renderMessage = (value, index) => {
+        const { typeOrFieldInfo: fieldInfo, name } = this.props;
         const { nestedDepth, collapsed } = this.props;
         return (
             <Message
                 key={name}
-                value={fieldInfo}
+                value={value || fieldInfo}
                 name={name}
                 nestedDepth={nestedDepth + 1}
                 collapsed={collapsed}
-                onChange={this.generateOnChange(node)}
+                onChange={this.generateOnChange(index)}
             />
         );
     };
-    renderRepeated = (node) => {
-        const { name, type, fieldInfo, value } = node;
-        const { nestedDepth, collapsed } = this.props;
-        return (
-            <Repeated
-                value={value || []}
-                name={name}
-                typeOrFieldInfo={type || fieldInfo}
-                collapsed={collapsed}
-                nestedDepth={nestedDepth + 1}
-            />
-        );
+    renderRepeated = (value, index) => {
+        // TODO: REPEATED
     };
-    renderNode = (node) => {
-        const { label, type } = node;
-        if (label === 'REPEATED') {
-            return this.renderRepeated(node);
+    renderNode = (value, index) => {
+        const { typeOrFieldInfo } = this.props;
+        if (Array.isArray(typeOrFieldInfo)) {
+            return this.renderMessage(value || typeOrFieldInfo, index);
         } else {
-            return (type === 'message' ? this.renderMessage : this.renderInput)(node);
+            return this.renderInput(value, index);
         }
     };
     render() {
@@ -117,13 +107,13 @@ class Message extends Component {
                         src={CollapsedIcon}
                     />
                     <span className="tree-input-name">"{name}": </span>
-                    <span>{"\u007b"}</span>
+                    <span>[</span>
                     <span if={collapsed}> ... }</span>
                     <span className="tree-input-count">{length} Items</span>
                 </div>
                 <div className="tree-input-items">{value.map(this.renderNode)}</div>
                 <div className="tree-input-end">
-                    <span onClick={this.handleToggleCollapsed}>{"\u007d"}</span>
+                    <span onClick={this.handleToggleCollapsed}>]</span>
                 </div>
             </div>
         );
@@ -131,4 +121,4 @@ class Message extends Component {
 }
 
 
-export default Message;
+export default Repeated;
