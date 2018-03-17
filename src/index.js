@@ -14,16 +14,26 @@ class TreeInput extends Component {
     static propTypes = {
         schema: PropTypes.array.isRequired,
         name: PropTypes.string,
+        collapsed: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+        nestedDepth: PropTypes.number,
         onChange: PropTypes.func
     };
     static defaultProps = {
         name: 'Root',
-        onChange: noop
+        onChange: noop,
+        nestedDepth: 0
     };
 
     constructor(...args) {
         super(...args);
-        this.state.value = this.props.schema;
+        const {
+            schema, nestedDepth, collapsed
+        } = this.props;
+        this.state = {
+            value: schema,
+            collapsed: typeof collapsed === 'number' ?
+                nestedDepth >= collapsed : !!collapsed
+        };
     }
 
     state = {
@@ -31,6 +41,12 @@ class TreeInput extends Component {
         collapsed: false
     };
 
+    handleToggleCollapsed = (collapsed) => {
+        this.setState({
+            collapsed: typeof collapsed === 'boolean' ?
+                collapsed : !this.state.collapsed
+        });
+    };
     format = (value) => {
         value = value.map(i => {
             const { name, type, label, value } = i;
@@ -50,40 +66,27 @@ class TreeInput extends Component {
         return `{${value}}`;
     };
     formatMessage = (value) => {
-
+        console.log(value);
+        return '';
     };
     formatRepeated = (value) => {
 
     };
 
-
-    handleToggleCollapsed = (collapsed) => {
-        this.setState({
-            collapsed: typeof collapsed === 'boolean' ?
-                collapsed : !this.state.collapsed
-        });
-    };
-
-    setValue = (node) => {
-        const { value } = node;
-        const { value: V } = this.state;
-        V.find(i => i === node).value = value;
-        const newValue = [...V];
-        this.setState({ value: newValue });
-        return newValue;
-    };
-    renderInput = (node) => {
-        const { name, type, value } = node;
-        const onChange = (e, value) => {
+    generateOnChange = (node) => {
+        return (e, value) => {
             this.setState((prevState) => {
                 const { value: V } = prevState;
                 V.find(i => i === node).value = value;
                 const newValue = [...V];
-                const formated = this.format(newValue);
-                this.props.onChange(formated);
+                const formated = this.props.nestedDepth === 0 ? this.format(newValue) : newValue;
+                this.props.onChange(e, formated);
                 return { value: newValue };
             });
         };
+    };
+    renderInput = (node) => {
+        const { name, type, value } = node;
         return (
             <div className="tree-input-item" key={name}>
                 <div className="tree-input-item-info">
@@ -94,30 +97,44 @@ class TreeInput extends Component {
                     name={name}
                     type={type}
                     value={value}
-                    onChange={onChange}
+                    onChange={this.generateOnChange(node)}
                 />
             </div>
         );
     };
     renderMessage = (node) => {
-
+        const { fieldInfo, name } = node;
+        const { nestedDepth, collapsed } = this.props;
+        return (
+            <TreeInput
+                key={name}
+                schema={fieldInfo}
+                name={name}
+                nestedDepth={nestedDepth + 1}
+                collapsed={collapsed}
+                onChange={this.generateOnChange(node)}
+            />
+        );
     };
     renderRepeated = (node) => {
         // TODO: REPEATED
     };
     renderNode = (node) => {
         const { label, type } = node;
-        if (label === 'OPTIONAL') {
-            return (type === 'message' ? this.renderMessage : this.renderInput)(node);
-        } else {
+        if (label === 'REPEATED') {
             return this.renderRepeated(node);
+        } else {
+            return (type === 'message' ? this.renderMessage : this.renderInput)(node);
         }
     };
     render() {
         const { value, value: { length }, collapsed } = this.state;
         const { name } = this.props;
         return (
-            <div className={`tree-input${collapsed ? ' tree-input-collapsed' : ''}`}>
+            <div
+                className={`tree-input${collapsed ? ' tree-input-collapsed' : ''}`}
+                key={name}
+            >
                 <div
                     className="tree-input-start"
                     onClick={this.handleToggleCollapsed}
@@ -130,7 +147,7 @@ class TreeInput extends Component {
                     <span
                         className="tree-input-name"
                         onClick={this.handleToggleCollapsed}
-                    >{name}: </span>
+                    >"{name}": </span>
                     <span onClick={this.handleToggleCollapsed}>{"\u007b"}</span>
                     <span if={collapsed} onClick={this.handleToggleCollapsed}> ... }</span>
                     <span className="tree-input-count">{length} Items</span>

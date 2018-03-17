@@ -83,7 +83,7 @@ const schema = [
 
 
 const App = () => (
-    <TreeInput schema={schema} />
+    <TreeInput schema={schema} collapsed={2} />
 );
 
 

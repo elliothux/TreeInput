@@ -33,7 +33,7 @@ class Input extends PureComponent {
         const { value } = e.target;
         const formated = this.format(value);
         const event = { ...e, value: formated, component: this };
-        onChange(event, formated);
+        onChange(event, formated, value);
     };
     format = (value) => {
         return value;

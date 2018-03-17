@@ -1,6 +1,6 @@
 
 .tree-input {
-  margin-left: 10px;
+  margin: 8px 10px;
   transition: all ease 300ms;
   height: auto;
   border-left: 1px solid rgb(206, 206, 206);
@@ -22,9 +22,12 @@
     }
     .tree-input-count {
       display: inline-block;
-      margin-left: 20px;
+      margin-left: 40px;
       opacity: 0.8;
       font-style: italic;
+    }
+    .tree-input-name {
+      font-weight: bold;
     }
   }
   .tree-input-end {
@@ -78,7 +81,7 @@
 }
 
 .tree-input.tree-input-collapsed {
-  height: 25px;
+  height: 32px;
   border-left: none;
   .tree-input-start {
     .tree-input-expand {
