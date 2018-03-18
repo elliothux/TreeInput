@@ -50,28 +50,40 @@ class TreeInput extends Component {
                 name, type, label, value, fieldInfo
             } = i;
             if (label === "REPEATED") {
-                return `"${name}":${this.formatRepeated(value)}`;
+                return `"${name}":${this.formatRepeated(value, label === 'REPEATED' ? fieldInfo : type)}`;
             } else if (type === 'message') {
                 return `"${name}":${this.format(fieldInfo)}`;
             } else {
                 if ([undefined, null, ''].includes(value)) return false;
-                if ([typesMap.BYTES, typesMap.STRING].includes(type)) {
-                    return `"${name}":"${value}"`;
-                } else {
-                    return `"${name}":${value}`;
-                }
+                return `"${name}":${this.formatSingle(value, type)}`;
             }
         }).filter(i => !!i).join(',');
         return `{${value}}`;
     };
-    formatRepeated = (value) => {
-        return `""`;
+    formatRepeated = (value, typeOrFieldInfo) => {
+        if (value) {
+            if (typeof typeOrFieldInfo === 'string') {
+                value = value.map((v) => this.formatSingle(v, typeOrFieldInfo)).join(',');
+            } else {
+                value = value.map(this.formatSingle).join(',');
+            }
+        } else {
+            value = '';
+        }
+        return `[${value}]`;
+    };
+    formatSingle = (value, type) => {
+        if ([typesMap.BYTES, typesMap.STRING].includes(type)) {
+            return `"${value}"`;
+        } else {
+            return `${value}`;
+        }
     };
 
     onChange = (e, value) => {
         this.setState({ value });
         const formated = this.format(value);
-        console.log(value, formated);
+        console.log(formated);
         console.log(JSON.parse(formated));
     };
     render() {

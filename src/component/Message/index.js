@@ -80,7 +80,6 @@ class Message extends Component {
         );
     };
     renderRepeated = (node) => {
-        console.log(node);
         const { name, type, fieldInfo, value } = node;
         const { nestedDepth, collapsed } = this.props;
         return (
@@ -91,6 +90,7 @@ class Message extends Component {
                 typeOrFieldInfo={type || fieldInfo}
                 collapsed={collapsed}
                 nestedDepth={nestedDepth + 1}
+                onChange={this.generateOnChange(node)}
             />
         );
     };
@@ -120,7 +120,7 @@ class Message extends Component {
                     />
                     <span className="tree-input-name">"{name}": </span>
                     <span>{"\u007b"}</span>
-                    <span if={collapsed}> ... }</span>
+                    <span if={collapsed}> <span if={length > 0}>...</span> }</span>
                     <span className="tree-input-count">{length} Items</span>
                 </div>
                 <div className="tree-input-items">{value.map(this.renderNode)}</div>

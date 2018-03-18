@@ -77,23 +77,41 @@ class Repeated extends Component {
             />
         );
     };
-    renderRepeated = (value, index) => {
-        // TODO: REPEATED
-    };
     renderNode = (value, index) => {
-        console.log(index);
-        return null;
         const { typeOrFieldInfo } = this.props;
         if (Array.isArray(typeOrFieldInfo)) {
-            // return this.renderMessage(value || typeOrFieldInfo, index);
+            return this.renderMessage(value || typeOrFieldInfo, index);
         } else {
-            // return this.renderInput(value, index);
+            return this.renderInput(value, index);
         }
     };
     render() {
         const { collapsed } = this.state;
         const { value, value: { length }, name } = this.props;
-        return (111);
+        return (
+            <div
+                className={`tree-input${collapsed ? ' tree-input-collapsed' : ''}`}
+                key={name}
+            >
+                <div
+                    className="tree-input-start"
+                    onClick={this.handleToggleCollapsed}
+                >
+                    <img
+                        className="tree-input-expand"
+                        src={CollapsedIcon}
+                    />
+                    <span className="tree-input-name">"{name}": </span>
+                    <span>[</span>
+                    <span if={collapsed}> <span if={length > 0}>...</span> ]</span>
+                    <span className="tree-input-count">{length} Items</span>
+                </div>
+                <div className="tree-input-items">{value.map(this.renderNode)}</div>
+                <div className="tree-input-end">
+                    <span onClick={this.handleToggleCollapsed}>]</span>
+                </div>
+            </div>
+        );
     }
 }
 
