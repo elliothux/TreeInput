@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Input from '../Input';
 import Message from '../Message';
 import CollapsedIcon from '../../media/collapsed.svg';
+import AddIcon from '../../media/add.png';
 import { noop, types } from '../../utils';
 
 
@@ -43,6 +44,11 @@ class Repeated extends Component {
                 collapsed : !this.state.collapsed
         });
     };
+    handleAddItem = (e) => {
+        const { value: newValue } = this.props;
+        newValue.push('');
+        this.props.onChange(e, newValue);
+    };
 
     generateOnChange = (index) => {
         return (e, value) => {
@@ -55,6 +61,7 @@ class Repeated extends Component {
         const { name, typeOrFieldInfo: type } = this.props;
         return (
             <Input
+                className="tree-input-repeated-item"
                 key={index}
                 name={name}
                 type={type}
@@ -105,6 +112,11 @@ class Repeated extends Component {
                     <span>[</span>
                     <span if={collapsed}> <span if={length > 0}>...</span> ]</span>
                     <span className="tree-input-count">{length} Items</span>
+                    <img
+                        className="tree-input-add"
+                        src={AddIcon}
+                        onClick={this.handleAddItem}
+                    />
                 </div>
                 <div className="tree-input-items">{value.map(this.renderNode)}</div>
                 <div className="tree-input-end">

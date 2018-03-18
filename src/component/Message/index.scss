@@ -15,11 +15,13 @@
   }
   .tree-input-start {
     left: -7px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     .tree-input-expand {
       width: 20px;
       position: relative;
       left: -3px;
-      top: 4px;
       transition: all ease 300ms;
     }
     .tree-input-count {
@@ -30,6 +32,11 @@
     }
     .tree-input-name {
       font-weight: bold;
+    }
+    .tree-input-add {
+      width: 16px;
+      height: 16px;
+      margin-left: 20px;
     }
   }
   .tree-input-end {
@@ -58,27 +65,31 @@
           margin-right: 30px;
         }
       }
-      & > input {
-        width: 220px;
-        height: 32px;
-        line-height: 1.5;
-        padding: 4px 11px;
-        box-sizing: border-box;
-        border: 1px solid #d9d9d9;
-        border-radius: 4px;
-        color: rgba(0, 0, 0, 0.65);
-        transition: all ease 300ms;
-        background: transparent;
-        &::placeholder {
-          color: rgb(194, 194, 194);
-        }
-        &:focus {
-          border-color: #40a9ff;
-          outline: none;
-          box-shadow: 0 0 4px 1px rgba(59, 169, 255, 0.71);
-        }
-      }
     }
+  }
+  .tree-input-item-input, .tree-input-repeated-item {
+    width: 220px;
+    height: 32px;
+    line-height: 1.5;
+    padding: 4px 11px;
+    box-sizing: border-box;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transition: all ease 300ms;
+    background: transparent;
+    &::placeholder {
+      color: rgb(194, 194, 194);
+    }
+    &:focus {
+      border-color: #40a9ff;
+      outline: none;
+      box-shadow: 0 0 4px 1px rgba(59, 169, 255, 0.71);
+    }
+  }
+  .tree-input-repeated-item {
+    margin: 10px 20px 5px 0;
+    width: 120px;
   }
 }
 

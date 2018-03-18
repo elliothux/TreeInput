@@ -57,6 +57,7 @@ class Message extends Component {
                     <span className="tree-input-item-type">: {type}</span>
                 </div>
                 <Input
+                    className="tree-input-item-input"
                     name={name}
                     type={type}
                     value={value}

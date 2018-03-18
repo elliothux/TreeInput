@@ -18,14 +18,16 @@ class Input extends PureComponent {
         value: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.number
-        ])
+        ]),
+        className: PropTypes.string
     };
     static defaultProps = {
         type: typesMap.STRING,
         onChange: noop,
         onPressEnter: noop,
         getRef: noop,
-        value: ''
+        value: '',
+        className: ''
     };
 
     onChange = (e) => {
@@ -39,10 +41,13 @@ class Input extends PureComponent {
         return value;
     };
     render() {
-        const { value, name, type } = this.props;
+        const {
+            value, name, type, className
+        } = this.props;
         return (
             <input
                 type="text"
+                className={className}
                 value={value}
                 placeholder={`${name}: ${type}`}
                 onChange={this.onChange}
