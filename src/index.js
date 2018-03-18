@@ -7,6 +7,7 @@ import { noop, typesMap } from './utils';
 
 import './index.scss';
 
+const EMPTY = {};
 
 
 class TreeInput extends Component {
@@ -14,11 +15,54 @@ class TreeInput extends Component {
         schema: PropTypes.array.isRequired,
         rootName: PropTypes.string,
         collapsed: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        filterEmpty: PropTypes.bool
     };
     static defaultProps = {
         name: 'Root',
-        onChange: noop
+        onChange: noop,
+        filterEmpty: true
+    };
+
+    // Format Value to JSON
+    static format = (value, filterEmpty) => {
+        value = value.map(i => {
+            const {
+                name, type, label, value, fieldInfo
+            } = i;
+            let v;
+            if (label === "REPEATED") {
+                if (!value || value.length === 0) return EMPTY;
+                v = TreeInput.formatRepeated(value, label === 'REPEATED' ? fieldInfo : type);
+            } else if (type === 'message') {
+                v = TreeInput.format(fieldInfo, filterEmpty);
+                if (v === '{}') return EMPTY;
+            } else {
+                if (filterEmpty && [undefined, null, ''].includes(value)) return EMPTY;
+                if (value === undefined) {
+                    v = 'null'
+                } else {
+                    v = TreeInput.formatSingle(value, type);
+                }
+            }
+            return `"${name}":${v}`;
+        }).filter(i => i !== EMPTY).join(',');
+        return `{${value}}`;
+    };
+    static formatRepeated = (value, typeOrFieldInfo) => {
+        if (typeof typeOrFieldInfo === 'string') {
+            value = value.map((v) => TreeInput.formatSingle(v, typeOrFieldInfo)).join(',');
+        } else {
+            value = value.map(TreeInput.formatSingle).join(',');
+        }
+        return `[${value}]`;
+    };
+    static formatSingle = (value, type) => {
+        if ([typesMap.BYTES, typesMap.STRING].includes(type)) {
+            return `"${value}"`;
+        } else {
+            return `${value}`;
+        }
     };
 
     constructor(...args) {
@@ -44,45 +88,10 @@ class TreeInput extends Component {
                 collapsed : !this.state.collapsed
         });
     };
-    format = (value) => {
-        value = value.map(i => {
-            const {
-                name, type, label, value, fieldInfo
-            } = i;
-            if (label === "REPEATED") {
-                return `"${name}":${this.formatRepeated(value, label === 'REPEATED' ? fieldInfo : type)}`;
-            } else if (type === 'message') {
-                return `"${name}":${this.format(fieldInfo)}`;
-            } else {
-                if ([undefined, null, ''].includes(value)) return false;
-                return `"${name}":${this.formatSingle(value, type)}`;
-            }
-        }).filter(i => !!i).join(',');
-        return `{${value}}`;
-    };
-    formatRepeated = (value, typeOrFieldInfo) => {
-        if (value) {
-            if (typeof typeOrFieldInfo === 'string') {
-                value = value.map((v) => this.formatSingle(v, typeOrFieldInfo)).join(',');
-            } else {
-                value = value.map(this.formatSingle).join(',');
-            }
-        } else {
-            value = '';
-        }
-        return `[${value}]`;
-    };
-    formatSingle = (value, type) => {
-        if ([typesMap.BYTES, typesMap.STRING].includes(type)) {
-            return `"${value}"`;
-        } else {
-            return `${value}`;
-        }
-    };
 
     onChange = (e, value) => {
         this.setState({ value });
-        const formated = this.format(value);
+        const formated = TreeInput.format(value, this.props.filterEmpty);
         console.log(formated);
         console.log(JSON.parse(formated));
     };
@@ -102,6 +111,10 @@ class TreeInput extends Component {
 }
 
 
+const format = TreeInput.format;
+
+
 export {
-    TreeInput
+    TreeInput,
+    format
 };
