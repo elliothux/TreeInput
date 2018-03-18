@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Message from './component/Message';
 import { noop, typesMap } from './utils';
 
+import './index.scss';
 
 
 class TreeInput extends Component {

@@ -4,6 +4,8 @@
   transition: all ease 300ms;
   height: auto;
   border-left: 1px solid rgb(206, 206, 206);
+  position: relative;
+  left: -22px;
   .tree-input-start, .tree-input-end {
     position: relative;
     background-color: white;
@@ -34,7 +36,7 @@
     left: -3px;
   }
   .tree-input-items {
-    margin-left: 20px;
+    margin-left: 40px;
     .tree-input-item {
       height: 32px;
       margin: 8px 0;

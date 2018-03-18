@@ -7,7 +7,6 @@ import Message from '../Message';
 import CollapsedIcon from '../../media/collapsed.svg';
 import { noop, types } from '../../utils';
 
-import './index.scss';
 
 
 
@@ -15,7 +14,7 @@ class Repeated extends Component {
     static propTypes = {
         value: PropTypes.array.isRequired,
         name: PropTypes.string.isRequired,
-        typeOrFieldInfo: PropTypes.oneOf([
+        typeOrFieldInfo: PropTypes.oneOfType([
             PropTypes.oneOf(types),
             PropTypes.array
         ]).isRequired,
@@ -55,14 +54,13 @@ class Repeated extends Component {
     renderInput = (value, index) => {
         const { name, typeOrFieldInfo: type } = this.props;
         return (
-            <div className="tree-input-item" key={index}>
-                <Input
-                    name={name}
-                    type={type}
-                    value={value}
-                    onChange={this.generateOnChange(index)}
-                />
-            </div>
+            <Input
+                key={index}
+                name={name}
+                type={type}
+                value={value}
+                onChange={this.generateOnChange(index)}
+            />
         );
     };
     renderMessage = (value, index) => {
@@ -83,39 +81,21 @@ class Repeated extends Component {
         // TODO: REPEATED
     };
     renderNode = (value, index) => {
+        console.log(index);
+        return null;
         const { typeOrFieldInfo } = this.props;
         if (Array.isArray(typeOrFieldInfo)) {
-            return this.renderMessage(value || typeOrFieldInfo, index);
+            // return this.renderMessage(value || typeOrFieldInfo, index);
         } else {
-            return this.renderInput(value, index);
+            // return this.renderInput(value, index);
         }
     };
     render() {
         const { collapsed } = this.state;
         const { value, value: { length }, name } = this.props;
+        console.log(name);
         return (
-            <div
-                className={`tree-input${collapsed ? ' tree-input-collapsed' : ''}`}
-                key={name}
-            >
-                <div
-                    className="tree-input-start"
-                    onClick={this.handleToggleCollapsed}
-                >
-                    <img
-                        className="tree-input-expand"
-                        src={CollapsedIcon}
-                    />
-                    <span className="tree-input-name">"{name}": </span>
-                    <span>[</span>
-                    <span if={collapsed}> ... }</span>
-                    <span className="tree-input-count">{length} Items</span>
-                </div>
-                <div className="tree-input-items">{value.map(this.renderNode)}</div>
-                <div className="tree-input-end">
-                    <span onClick={this.handleToggleCollapsed}>]</span>
-                </div>
-            </div>
+            111
         );
     }
 }

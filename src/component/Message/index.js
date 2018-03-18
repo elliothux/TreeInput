@@ -80,6 +80,7 @@ class Message extends Component {
         );
     };
     renderRepeated = (node) => {
+        console.log(node);
         const { name, type, fieldInfo, value } = node;
         const { nestedDepth, collapsed } = this.props;
         return (
@@ -102,10 +103,10 @@ class Message extends Component {
     };
     render() {
         const { collapsed } = this.state;
-        const { value, value: { length }, name } = this.props;
+        const { value, value: { length }, name, nestedDepth } = this.props;
         return (
             <div
-                className={`tree-input${collapsed ? ' tree-input-collapsed' : ''}`}
+                className={`tree-input${collapsed ? ' tree-input-collapsed' : ''}${nestedDepth === 1 ? ' tree-input-root' : ''}`}
                 key={name}
             >
                 <div
