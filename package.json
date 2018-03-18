@@ -6,16 +6,23 @@
   "author": "胡青杨 <i@do.codes>",
   "license": "MIT",
   "scripts": {
-    "start": "parcel example/index.html"
+    "start": "webpack-dev-server --hot --port 2333"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "babel-plugin-jsx-if-directive": "0.0.7",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
     "node-sass": "^4.7.2",
-    "parcel-bundler": "^1.6.2"
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "url-loader": "^1.0.1",
+    "webpack-cli": "^2.0.12"
   },
   "dependencies": {
     "prop-types": "^15.6.1",

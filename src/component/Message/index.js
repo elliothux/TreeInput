@@ -85,6 +85,7 @@ class Message extends Component {
         const { nestedDepth, collapsed } = this.props;
         return (
             <Repeated
+                key={name}
                 value={value || []}
                 name={name}
                 typeOrFieldInfo={type || fieldInfo}

@@ -93,10 +93,7 @@ class Repeated extends Component {
     render() {
         const { collapsed } = this.state;
         const { value, value: { length }, name } = this.props;
-        console.log(name);
-        return (
-            111
-        );
+        return (111);
     }
 }
 

@@ -8,6 +8,7 @@ import { noop, typesMap } from './utils';
 import './index.scss';
 
 
+
 class TreeInput extends Component {
     static propTypes = {
         schema: PropTypes.array.isRequired,
