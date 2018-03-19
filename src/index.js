@@ -19,7 +19,8 @@ class TreeInput extends Component {
         filterEmpty: PropTypes.bool
     };
     static defaultProps = {
-        name: 'Root',
+        rootName: 'Root',
+        collapsed: true,
         onChange: noop,
         filterEmpty: true
     };
@@ -77,17 +78,7 @@ class TreeInput extends Component {
         };
     }
 
-    state = {
-        value: [],
-        collapsed: false
-    };
-
-    handleToggleCollapsed = (collapsed) => {
-        this.setState({
-            collapsed: typeof collapsed === 'boolean' ?
-                collapsed : !this.state.collapsed
-        });
-    };
+    state = { value: [] };
 
     onChange = (e, value) => {
         this.setState({ value });
@@ -96,14 +87,14 @@ class TreeInput extends Component {
         console.log(JSON.parse(formated));
     };
     render() {
-        const { value, collapsed } = this.state;
-        const { name } = this.props;
+        const { value } = this.state;
+        const { rootName, collapsed } = this.props;
         return (
             <Message
                 value={value}
                 collapsed={collapsed}
                 nestedDepth={1}
-                name={name}
+                name={rootName}
                 onChange={this.onChange}
             />
         );
