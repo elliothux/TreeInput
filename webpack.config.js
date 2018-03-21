@@ -25,10 +25,6 @@ module.exports = {
                 use: 'style-loader!css-loader'
             },
             {
-                test: /\.(woff|svg|eot|ttf)\??.*$/,
-                use: 'url-loader?limit=50000'
-            },
-            {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: "file-loader"
             },

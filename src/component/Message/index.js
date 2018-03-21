@@ -66,6 +66,21 @@ class Message extends Component {
             </div>
         );
     };
+    renderEnum = (node) => {
+        console.log(node);
+        return <div className="tree-input-item" key={name}>
+            <div className="tree-input-item-info">
+                <span className="tree-input-item-name">"{name}"</span>
+                <span className="tree-input-item-type">: {type}</span>
+            </div>
+            <Input
+                name={name}
+                type={type}
+                value={value}
+                onChange={this.generateOnChange(node)}
+            />
+        </div>;
+    };
     renderMessage = (node) => {
         const { fieldInfo, name } = node;
         const { nestedDepth, collapsed } = this.props;
@@ -88,7 +103,7 @@ class Message extends Component {
                 key={name}
                 value={value || []}
                 name={name}
-                typeOrFieldInfo={type || fieldInfo}
+                typeOrFieldInfo={fieldInfo || type}
                 collapsed={collapsed}
                 nestedDepth={nestedDepth + 1}
                 onChange={this.generateOnChange(node)}
@@ -100,7 +115,11 @@ class Message extends Component {
         if (label === 'REPEATED') {
             return this.renderRepeated(node);
         } else {
-            return (type === 'message' ? this.renderMessage : this.renderInput)(node);
+            switch (type) {
+                case 'message': return this.renderMessage(node);
+                case 'enum': return this.renderEnum(node);
+                default: return this.renderInput(node);
+            }
         }
     };
     render() {
