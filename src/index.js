@@ -61,6 +61,8 @@ class TreeInput extends Component {
     static formatSingle = (value, type) => {
         if ([typesMap.BYTES, typesMap.STRING].includes(type)) {
             return `"${value}"`;
+        } else if (type === typesMap.ENUM) {
+            return typeof value === 'string' ? `"${value}"` : `${value}`;
         } else {
             return `${value}`;
         }
