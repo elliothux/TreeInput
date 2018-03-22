@@ -11,18 +11,14 @@ import './index.scss';
 class Enum extends PureComponent {
     static propTypes = {
         name: PropTypes.string.isRequired,
-        type: PropTypes.oneOf(types),
+        fieldInfo: PropTypes.array.isRequired,
         onChange: PropTypes.func,
         onPressEnter: PropTypes.func,
         getRef: PropTypes.func,
-        value: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.number
-        ]),
+        value: PropTypes.string,
         className: PropTypes.string
     };
     static defaultProps = {
-        type: typesMap.STRING,
         onChange: noop,
         onPressEnter: noop,
         getRef: noop,
@@ -30,6 +26,16 @@ class Enum extends PureComponent {
         className: ''
     };
 
+    state = {
+        expand: false
+    };
+    handleToggleExpand = (expand) => {
+        if (typeof expand === 'boolean') {
+            this.setState({ expand });
+        } else {
+            this.setState({ expand: !this.state.expand });
+        }
+    };
     onChange = (e) => {
         const { onChange } = this.props;
         const { value } = e.target;
@@ -42,16 +48,26 @@ class Enum extends PureComponent {
     };
     render() {
         const {
-            value, name, type, className
+            value, name, className, fieldInfo
         } = this.props;
+        console.log(fieldInfo);
         return (
-            <input
-                type="text"
-                className={className}
-                value={value}
-                placeholder={`${name}: ${type}`}
-                onChange={this.onChange}
-            />
+            <div
+                key={name}
+                className={`tree-input-item-enum ${className}`}
+                onClick={this.handleToggleExpand}
+            >
+                {value}
+                <div className="tree-input-enum-options">
+                    {
+                        fieldInfo.map(i => (
+                            <div className="tree-input-enum-options">
+                                {i.name}
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
         )
     }
 }

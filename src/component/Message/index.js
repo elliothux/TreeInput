@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Input from '../Input';
+import Enum from '../Enum';
 import Repeated from '../Repeated';
 import CollapsedIcon from '../../media/collapsed.svg';
 import { noop } from '../../utils';
@@ -67,16 +68,16 @@ class Message extends Component {
         );
     };
     renderEnum = (node) => {
-        console.log(node);
+        const { name, fieldInfo, value } = node;
         return <div className="tree-input-item" key={name}>
             <div className="tree-input-item-info">
                 <span className="tree-input-item-name">"{name}"</span>
-                <span className="tree-input-item-type">: {type}</span>
+                <span className="tree-input-item-type">: enum</span>
             </div>
-            <Input
+            <Enum
                 name={name}
-                type={type}
                 value={value}
+                fieldInfo={fieldInfo}
                 onChange={this.generateOnChange(node)}
             />
         </div>;

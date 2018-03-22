@@ -12,7 +12,7 @@ module.exports = {
         filename: '[name].build.js',
         publicPath: '/assets/'
     },
-    mode: 'development',
+    // mode: 'development',
     module: {
         rules: [
             {
