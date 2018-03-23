@@ -20,10 +20,12 @@ class Message extends Component {
         name: PropTypes.string.isRequired,
         collapsed: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]).isRequired,
         nestedDepth: PropTypes.number.isRequired,
+        documentation: PropTypes.string,
         onChange: PropTypes.func,
         onRemove: PropTypes.func
     };
     static defaultProps = {
+        documentation: '',
         onChange: noop,
         onRemove: noop
     };
