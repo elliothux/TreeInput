@@ -6,6 +6,9 @@
   position: relative;
   &.active {
     box-shadow: 0 0 4px 1px rgba(59, 169, 255, 0.71);
+    border-color: #40a9ff !important;
+    .tree-input-item-enum-value {
+    }
     .tree-input-item-expand-icon {
       transform: rotate(180deg);
     }
