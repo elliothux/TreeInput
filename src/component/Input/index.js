@@ -56,7 +56,7 @@ class Input extends Component {
     };
     render() {
         const {
-            value, name, type, className
+            value, name, type, className, documentation
         } = this.props;
         return (
             <input

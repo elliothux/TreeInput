@@ -29,6 +29,10 @@ module.exports = {
                 use: "file-loader"
             },
             {
+                test: /\.(ttf|eot|svg|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader"
+            },
+            {
                 test: /\.s[a|c]ss$/,
                 use: ['style-loader', 'css-loader', 'sass-loader']
             }

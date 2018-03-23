@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './index.scss';
+
 
 
 class Tooltip extends Component {
@@ -13,9 +15,14 @@ class Tooltip extends Component {
     };
 
     render() {
+        const { text } = this.props;
         return (
-            <div>
-                <h1>Hello</h1>
+            <div
+                if={text.trim()}
+                className="tree-input-tooltip"
+            >
+                <span>{text}</span>
+                <div className="tree-input-tooltip-arrow"/>
             </div>
         );
     }

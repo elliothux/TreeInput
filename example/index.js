@@ -8,6 +8,57 @@ import './index.scss';
 
 const schema = [
     {
+        "tag": 1,
+        "name": "uin",
+        "documentation": "uin\r",
+        "label": "OPTIONAL",
+        "type": "uint64"
+    },
+    {
+        "tag": 2,
+        "name": "uid_type",
+        "documentation": "用户类型\r",
+        "label": "OPTIONAL",
+        "type": "uint32"
+    },
+    {
+        "tag": 3,
+        "fieldInfo": [
+            {
+                "tag": 1,
+                "name": "aid",
+                "documentation": "机构id\r",
+                "label": "OPTIONAL",
+                "type": "string"
+            },
+            {
+                "tag": 2,
+                "name": "cid",
+                "documentation": "课程id\r",
+                "label": "OPTIONAL",
+                "type": "string"
+            },
+            {
+                "tag": 3,
+                "name": "name",
+                "documentation": "课程名称\r",
+                "label": "OPTIONAL",
+                "type": "string"
+            },
+            {
+                "tag": 4,
+                "name": "tid",
+                "documentation": "班级id\r",
+                "label": "REPEATED",
+                "type": "string"
+            }
+        ],
+        "name": "course_info",
+        "documentation": "课程信息\r",
+        "label": "OPTIONAL",
+        "type": "message"
+    },
+    {
         "tag": 1, "name": "name", "label": "OPTIONAL", "type": "string", "value": "测试"
     },
     {

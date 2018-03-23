@@ -6,10 +6,9 @@ import Input from '../Input';
 import Enum from '../Enum';
 import Boolean from '../Boolean';
 import Repeated from '../Repeated';
-import CollapsedIcon from '../../media/collapsed.svg';
+import Tooltip from '../Tooltip';
 import { noop, preventDefault } from '../../utils';
 
-import RemoveIcon from '../../media/remove.svg';
 import './index.scss';
 
 
@@ -60,67 +59,79 @@ class Message extends Component {
         };
     };
     renderInput = (node) => {
-        const { name, type, value } = node;
+        const { name, type, value, documentation } = node;
         return (
             <div
-                className="tree-input-item"
+                className={`tree-input-item ${type}`}
                 key={name}
             >
                 <div className="tree-input-item-info">
-                    <span className="tree-input-item-name">"{name}"</span>
-                    <span className="tree-input-item-type">: {type}</span>
+                    <div className="tree-input-item-name">
+                        <span>"{name}":</span>
+                        <Tooltip text={documentation} />
+                    </div>
+                    <span className="tree-input-item-type"> {type}</span>
                 </div>
                 <Input
                     className="tree-input-item-input"
                     name={name}
                     type={type}
                     value={value}
+                    documentation={documentation}
                     onChange={this.generateOnChange(node)}
                 />
             </div>
         );
     };
     renderEnum = (node) => {
-        const { name, fieldInfo, value } = node;
+        const { name, fieldInfo, value, documentation } = node;
         return (
             <div
-                className="tree-input-item"
+                className="tree-input-item enum"
                 key={name}
             >
                 <div className="tree-input-item-info">
-                    <span className="tree-input-item-name">"{name}"</span>
-                    <span className="tree-input-item-type">: enum</span>
+                    <div className="tree-input-item-name">
+                        <span>"{name}":</span>
+                        <Tooltip text={documentation} />
+                    </div>
+                    <span className="tree-input-item-type"> enum</span>
                 </div>
                 <Enum
                     name={name}
                     value={value}
                     fieldInfo={fieldInfo}
+                    documentation={documentation}
                     onChange={this.generateOnChange(node)}
                 />
             </div>
         );
     };
     renderBoolean = (node) => {
-        const { name, value } = node;
+        const { name, value, documentation } = node;
         return (
             <div
-                className="tree-input-item"
+                className="tree-input-item boolean"
                 key={name}
             >
                 <div className="tree-input-item-info">
-                    <span className="tree-input-item-name">"{name}"</span>
-                    <span className="tree-input-item-type">: boolean</span>
+                    <div className="tree-input-item-name">
+                        <span>"{name}":</span>
+                        <Tooltip text={documentation} />
+                    </div>
+                    <span className="tree-input-item-type"> boolean</span>
                 </div>
                 <Boolean
                     name={name}
                     value={value}
+                    documentation={documentation}
                     onChange={this.generateOnChange(node)}
                 />
             </div>
         );
     };
     renderMessage = (node) => {
-        const { fieldInfo, name } = node;
+        const { fieldInfo, name, documentation } = node;
         const { nestedDepth, collapsed } = this.props;
         return (
             <Message
@@ -129,12 +140,13 @@ class Message extends Component {
                 name={name}
                 nestedDepth={nestedDepth + 1}
                 collapsed={collapsed}
+                documentation={documentation}
                 onChange={this.generateOnChange(node)}
             />
         );
     };
     renderRepeated = (node) => {
-        const { name, type, fieldInfo, value } = node;
+        const { name, type, fieldInfo, value, documentation } = node;
         const { nestedDepth, collapsed } = this.props;
         return (
             <Repeated
@@ -144,6 +156,7 @@ class Message extends Component {
                 typeOrFieldInfo={fieldInfo || type}
                 collapsed={collapsed}
                 nestedDepth={nestedDepth + 1}
+                documentation={documentation}
                 onChange={this.generateOnChange(node)}
             />
         );
@@ -168,22 +181,30 @@ class Message extends Component {
             value: { length },
             name,
             nestedDepth,
-            onRemove
+            onRemove,
+            documentation
         } = this.props;
+        const isRoot = nestedDepth === 1;
         return (
             <div
-                className={`tree-input${collapsed ? ' tree-input-collapsed' : ''}${nestedDepth === 1 ? ' tree-input-root' : ''}`}
+                className={`tree-input${
+                    collapsed ? ' tree-input-collapsed' : ''}${
+                    isRoot ? ' tree-input-root' : ''} message`}
                 key={name}
             >
                 <div
                     className="tree-input-start"
                     onClick={this.handleToggleCollapsed}
                 >
-                    <img
-                        className="tree-input-expand"
-                        src={CollapsedIcon}
-                    />
-                    <span className="tree-input-name">"{name}": </span>
+                    <i className="tree-input-expand icon-collapsed"/>
+                    <div className="tree-input-name">
+                        <span>"{name}": </span>
+                        <Tooltip text={documentation} />
+                    </div>
+                    <span
+                        if={!isRoot}
+                        className="tree-input-item-type"
+                    > message</span>
                     <span className="tree-input-tag">{"\u007b"}</span>
                     <span className={collapsed ? '' : 'tree-input-hide'}>
                         <span if={length > 0}>...</span>
@@ -191,10 +212,9 @@ class Message extends Component {
                     </span>
                     <span if={length === 0} className="tree-input-count-empty">Empty</span>
                     <span else className="tree-input-count">{length} Items</span>
-                    <img
+                    <i
                         if={onRemove !== noop}
-                        className="tree-input-remove"
-                        src={RemoveIcon}
+                        className="tree-input-remove icon-remove"
                         onClick={onRemove}
                     />
                 </div>

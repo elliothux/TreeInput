@@ -15,8 +15,7 @@
   }
 
   .tree-input-add, .tree-input-remove {
-    width: 22px;
-    height: 22px;
+    font-size: 22px;
     cursor: pointer;
     transition: all ease 300ms;
     &:hover {
@@ -24,7 +23,7 @@
     }
   }
   .tree-input-add {
-    margin-left: 20px;
+    margin-left: 26px;
   }
   .tree-input-remove {
     margin-left: 10px;

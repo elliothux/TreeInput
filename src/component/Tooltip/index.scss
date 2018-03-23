@@ -1,0 +1,22 @@
+
+.tree-input-tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-weight: bold;
+  padding: 6px 11px;
+  border-radius: 4px;
+  top: -34px;
+  transition: all ease 200ms;
+  box-shadow: rgba(0, 0, 0, 0.07) 3px 3px 7px 0;
+  font-size: 13px;
+  .tree-input-tooltip-arrow {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    background-color: rgba(0, 0, 0, 0.8);
+    top: calc(100% - 6px);
+    left: 12px;
+  }
+}

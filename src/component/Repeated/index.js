@@ -4,12 +4,10 @@ import PropTypes from 'prop-types';
 
 import Input from '../Input';
 import Message from '../Message';
-import CollapsedIcon from '../../media/collapsed.svg';
-import AddIcon from '../../media/add.svg';
-import RemoveIcon from '../../media/remove.svg';
 import { noop, types, preventDefault, deepCopy } from '../../utils';
 
 import "./index.scss";
+import Tooltip from "../Tooltip";
 
 
 
@@ -106,9 +104,8 @@ class Repeated extends Component {
                     value={value}
                     onChange={this.generateOnChange(index)}
                 />
-                <img
-                    className="tree-input-remove"
-                    src={RemoveIcon}
+                <i
+                    className="tree-input-remove icon-remove"
                     onClick={(e) => this.handleRemoveItem(e, index)}
                 />
             </div>
@@ -138,21 +135,30 @@ class Repeated extends Component {
     };
     render() {
         const { collapsed } = this.state;
-        const { value, value: { length }, name } = this.props;
+        const {
+            value,
+            value: { length },
+            name,
+            documentation,
+            typeOrFieldInfo
+        } = this.props;
+        const isMessage = typeof typeOrFieldInfo !== 'string';
         return (
             <div
-                className={`tree-input-repeated tree-input${collapsed ? ' tree-input-collapsed' : ''}`}
+                className={`tree-input-repeated tree-input${
+                    collapsed ? ' tree-input-collapsed' : ''} ${isMessage ? 'message' : typeOrFieldInfo}`}
                 key={name}
             >
                 <div
                     className="tree-input-start"
                     onClick={this.handleToggleCollapsed}
                 >
-                    <img
-                        className="tree-input-expand"
-                        src={CollapsedIcon}
-                    />
-                    <span className="tree-input-name">"{name}": </span>
+                    <i className="tree-input-expand icon-collapsed"/>
+                    <div className="tree-input-name">
+                        <span>"{name}": </span>
+                        <Tooltip text={documentation}/>
+                    </div>
+                    <span className="tree-input-item-type"> {isMessage ? 'message' : typeOrFieldInfo}</span>
                     <span className="tree-input-tag">[</span>
                     <span className={collapsed ? '' : 'tree-input-hide'}>
                         <span if={length > 0}>...</span>
@@ -160,9 +166,8 @@ class Repeated extends Component {
                     </span>
                     <span if={length === 0} className="tree-input-count-empty">Empty</span>
                     <span else className="tree-input-count">{length} Items</span>
-                    <img
-                        className="tree-input-add"
-                        src={AddIcon}
+                    <i
+                        className="tree-input-add icon-add"
                         onClick={this.handleAddItem}
                     />
                 </div>
