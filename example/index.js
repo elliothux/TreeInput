@@ -1,6 +1,9 @@
+
 import React from 'react';
-import {render} from 'react-dom';
-import {TreeInput} from '../src';
+import { render } from 'react-dom';
+import { TreeInput } from '../src';
+
+import './index.scss';
 
 
 const schema = [
@@ -15,10 +18,16 @@ const schema = [
         "value": "1"
     },
     {
-        "tag": 2,
+        "tag": 3,
         "name": "aid_list",
         "label": "REPEATED",
         "type": "uint64"
+    },
+    {
+        "tag": 4,
+        "name": "get_all",
+        "label": "OPTIONAL",
+        "type": "boolean"
     },
     {
         "tag": 6,

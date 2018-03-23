@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Input from '../Input';
 import Enum from '../Enum';
+import Boolean from '../Boolean';
 import Repeated from '../Repeated';
 import CollapsedIcon from '../../media/collapsed.svg';
 import { noop, preventDefault } from '../../utils';
@@ -94,6 +95,25 @@ class Message extends Component {
             </div>
         );
     };
+    renderBoolean = (node) => {
+        const { name, value } = node;
+        return (
+            <div
+                className="tree-input-item"
+                key={name}
+            >
+                <div className="tree-input-item-info">
+                    <span className="tree-input-item-name">"{name}"</span>
+                    <span className="tree-input-item-type">: boolean</span>
+                </div>
+                <Boolean
+                    name={name}
+                    value={value}
+                    onChange={this.generateOnChange(node)}
+                />
+            </div>
+        );
+    };
     renderMessage = (node) => {
         const { fieldInfo, name } = node;
         const { nestedDepth, collapsed } = this.props;
@@ -131,6 +151,7 @@ class Message extends Component {
             switch (type) {
                 case 'message': return this.renderMessage(node);
                 case 'enum': return this.renderEnum(node);
+                case 'boolean': return this.renderBoolean(node);
                 default: return this.renderInput(node);
             }
         }
@@ -158,9 +179,13 @@ class Message extends Component {
                         src={CollapsedIcon}
                     />
                     <span className="tree-input-name">"{name}": </span>
-                    <span>{"\u007b"}</span>
-                    <span if={collapsed}> <span if={length > 0}>...</span> }</span>
-                    <span className="tree-input-count">{length} Items</span>
+                    <span className="tree-input-tag">{"\u007b"}</span>
+                    <span className={collapsed ? '' : 'tree-input-hide'}>
+                        <span if={length > 0}>...</span>
+                        <span className="tree-input-tag">}</span>
+                    </span>
+                    <span if={length === 0} className="tree-input-count-empty">Empty</span>
+                    <span else className="tree-input-count">{length} Items</span>
                     <img
                         if={onRemove !== noop}
                         className="tree-input-remove"

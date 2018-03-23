@@ -151,9 +151,13 @@ class Repeated extends Component {
                         src={CollapsedIcon}
                     />
                     <span className="tree-input-name">"{name}": </span>
-                    <span>[</span>
-                    <span if={collapsed}> <span if={length > 0}>...</span> ]</span>
-                    <span className="tree-input-count">{length} Items</span>
+                    <span className="tree-input-tag">[</span>
+                    <span className={collapsed ? '' : 'tree-input-hide'}>
+                        <span if={length > 0}>...</span>
+                        <span className="tree-input-tag">]</span>
+                    </span>
+                    <span if={length === 0} className="tree-input-count-empty">Empty</span>
+                    <span else className="tree-input-count">{length} Items</span>
                     <img
                         className="tree-input-add"
                         src={AddIcon}
