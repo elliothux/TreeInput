@@ -123,6 +123,7 @@ class Repeated extends Component {
                 nestedDepth={nestedDepth + 1}
                 collapsed={collapsed}
                 onChange={this.generateOnChange(index)}
+                onRemove={(e) => this.handleRemoveItem(e, index)}
             />
         );
     };

@@ -32,6 +32,10 @@
     }
     .tree-input-name {
       font-weight: bold;
+      min-width: 40px;
+    }
+    .tree-input-remove {
+      margin-left: 20px;
     }
   }
   .tree-input-end {

@@ -8,6 +8,7 @@ import Repeated from '../Repeated';
 import CollapsedIcon from '../../media/collapsed.svg';
 import { noop, preventDefault } from '../../utils';
 
+import RemoveIcon from '../../media/remove.svg';
 import './index.scss';
 
 
@@ -18,10 +19,12 @@ class Message extends Component {
         name: PropTypes.string.isRequired,
         collapsed: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]).isRequired,
         nestedDepth: PropTypes.number.isRequired,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onRemove: PropTypes.func
     };
     static defaultProps = {
-        onChange: noop
+        onChange: noop,
+        onRemove: noop
     };
 
     constructor(...args) {
@@ -134,7 +137,13 @@ class Message extends Component {
     };
     render() {
         const { collapsed } = this.state;
-        const { value, value: { length }, name, nestedDepth } = this.props;
+        const {
+            value,
+            value: { length },
+            name,
+            nestedDepth,
+            onRemove
+        } = this.props;
         return (
             <div
                 className={`tree-input${collapsed ? ' tree-input-collapsed' : ''}${nestedDepth === 1 ? ' tree-input-root' : ''}`}
@@ -152,6 +161,12 @@ class Message extends Component {
                     <span>{"\u007b"}</span>
                     <span if={collapsed}> <span if={length > 0}>...</span> }</span>
                     <span className="tree-input-count">{length} Items</span>
+                    <img
+                        if={onRemove !== noop}
+                        className="tree-input-remove"
+                        src={RemoveIcon}
+                        onClick={onRemove}
+                    />
                 </div>
                 <div className="tree-input-items">{value.map(this.renderNode)}</div>
                 <div className="tree-input-end">
