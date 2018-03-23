@@ -6,7 +6,7 @@ import Input from '../Input';
 import Enum from '../Enum';
 import Repeated from '../Repeated';
 import CollapsedIcon from '../../media/collapsed.svg';
-import { noop } from '../../utils';
+import { noop, preventDefault } from '../../utils';
 
 import './index.scss';
 
@@ -35,7 +35,8 @@ class Message extends Component {
 
     state = { collapsed: false };
 
-    handleToggleCollapsed = (collapsed) => {
+    handleToggleCollapsed = (e, collapsed) => {
+        preventDefault(e);
         this.setState({
             collapsed: typeof collapsed === 'boolean' ?
                 collapsed : !this.state.collapsed
@@ -52,7 +53,10 @@ class Message extends Component {
     renderInput = (node) => {
         const { name, type, value } = node;
         return (
-            <div className="tree-input-item" key={name}>
+            <div
+                className="tree-input-item"
+                key={name}
+            >
                 <div className="tree-input-item-info">
                     <span className="tree-input-item-name">"{name}"</span>
                     <span className="tree-input-item-type">: {type}</span>
@@ -69,18 +73,23 @@ class Message extends Component {
     };
     renderEnum = (node) => {
         const { name, fieldInfo, value } = node;
-        return <div className="tree-input-item" key={name}>
-            <div className="tree-input-item-info">
-                <span className="tree-input-item-name">"{name}"</span>
-                <span className="tree-input-item-type">: enum</span>
+        return (
+            <div
+                className="tree-input-item"
+                key={name}
+            >
+                <div className="tree-input-item-info">
+                    <span className="tree-input-item-name">"{name}"</span>
+                    <span className="tree-input-item-type">: enum</span>
+                </div>
+                <Enum
+                    name={name}
+                    value={value}
+                    fieldInfo={fieldInfo}
+                    onChange={this.generateOnChange(node)}
+                />
             </div>
-            <Enum
-                name={name}
-                value={value}
-                fieldInfo={fieldInfo}
-                onChange={this.generateOnChange(node)}
-            />
-        </div>;
+        );
     };
     renderMessage = (node) => {
         const { fieldInfo, name } = node;

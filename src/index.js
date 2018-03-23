@@ -34,7 +34,7 @@ class TreeInput extends Component {
             let v;
             if (label === "REPEATED") {
                 if (!value || value.length === 0) return EMPTY;
-                v = TreeInput.formatRepeated(value, label === 'REPEATED' ? fieldInfo : type);
+                v = TreeInput.formatRepeated(value, type === 'message' ? fieldInfo : type);
             } else if (type === 'message') {
                 v = TreeInput.format(fieldInfo, filterEmpty);
                 if (v === '{}') return EMPTY;
@@ -52,9 +52,12 @@ class TreeInput extends Component {
     };
     static formatRepeated = (value, typeOrFieldInfo) => {
         if (typeof typeOrFieldInfo === 'string') {
-            value = value.map((v) => TreeInput.formatSingle(v, typeOrFieldInfo)).join(',');
+            value = value
+                .map((v) => TreeInput.formatSingle(v, typeOrFieldInfo))
+                .filter((v) => !!v)
+                .join(',');
         } else {
-            value = value.map(TreeInput.formatSingle).join(',');
+            value = value.map(TreeInput.format).join(',');
         }
         return `[${value}]`;
     };

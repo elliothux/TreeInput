@@ -70,7 +70,7 @@
   .tree-input-item-input,
   .tree-input-item-enum,
   .tree-input-enum-options,
-  .tree-input-repeated-item {
+  .tree-input-repeated-item-input {
     width: 220px;
     height: 32px;
     line-height: 1.5;
@@ -89,10 +89,6 @@
       outline: none;
       box-shadow: 0 0 4px 1px rgba(59, 169, 255, 0.71);
     }
-  }
-  .tree-input-repeated-item {
-    margin: 10px 20px 5px 0;
-    width: 120px;
   }
 }
 

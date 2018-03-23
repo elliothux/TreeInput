@@ -16,7 +16,16 @@ const typesMap = {
 };
 
 
+function preventDefault(e) {
+    if (e) {
+        e.preventDefault && e.preventDefault();
+        e.stopPropagation && e.stopPropagation();
+        e.nativeEvent && e.nativeEvent.stopImmediatePropagation && e.nativeEvent.stopImmediatePropagation();
+    }
+}
+
+
 
 export {
-    noop, types, typesMap
+    noop, types, typesMap, preventDefault
 };

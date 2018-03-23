@@ -2,46 +2,6 @@ import React from 'react';
 import {render} from 'react-dom';
 import {TreeInput} from '../src';
 
-const a = {
-    "fieldInfo": [{
-        "tag": 1,
-        "name": "serviceName",
-        "documentation": "被回调的服务名\r",
-        "label": "REQUIRED",
-        "type": "string"
-    }, {
-        "tag": 2,
-        "name": "key",
-        "documentation": "定时器的可以，可不传，自己传的话需要保证唯一\r",
-        "label": "OPTIONAL",
-        "type": "string"
-    }, , {
-        "tag": 4,
-        "name": "cron",
-        "documentation": "cron 任务的参数\r",
-        "label": "OPTIONAL",
-        "type": "string"
-    }, {
-        "tag": 5,
-        "name": "fire",
-        "documentation": "简单任务的触发时间,时间戳，单位是毫秒,延时任务中表示顺延时间\r",
-        "label": "OPTIONAL",
-        "type": "uint64"
-    }, , {"tag": 7, "name": "route", "documentation": "l5信息\r", "label": "OPTIONAL", "type": "string"}, {
-        "tag": 8,
-        "fieldInfo": [{
-            "tag": 1,
-            "name": "callBackType",
-            "documentation": "回调类型,0 异步回调（仅唤起，异步上报执行结果） 1 同步等待\r",
-            "label": "OPTIONAL",
-            "type": "uint32"
-        }, {"tag": 2, "name": "retry", "documentation": "任务是否需要失败重试\r", "label": "OPTIONAL", "type": "bool"}],
-        "name": "desc",
-        "documentation": "任务扩展信息\r",
-        "label": "OPTIONAL",
-        "type": "message"
-    }]
-}
 
 const schema = [
     {
@@ -53,6 +13,12 @@ const schema = [
         "label": "OPTIONAL",
         "type": "uint32",
         "value": "1"
+    },
+    {
+        "tag": 2,
+        "name": "aid_list",
+        "label": "REPEATED",
+        "type": "uint64"
     },
     {
         "tag": 6,

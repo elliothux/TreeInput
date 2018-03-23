@@ -6,8 +6,9 @@ import Input from '../Input';
 import Message from '../Message';
 import CollapsedIcon from '../../media/collapsed.svg';
 import AddIcon from '../../media/add.png';
-import { noop, types } from '../../utils';
+import { noop, types, preventDefault } from '../../utils';
 
+import "./index.scss";
 
 
 
@@ -38,13 +39,15 @@ class Repeated extends Component {
 
     state = { collapsed: false };
 
-    handleToggleCollapsed = (collapsed) => {
+    handleToggleCollapsed = (e, collapsed) => {
+        preventDefault(e);
         this.setState({
             collapsed: typeof collapsed === 'boolean' ?
                 collapsed : !this.state.collapsed
         });
     };
     handleAddItem = (e) => {
+        preventDefault(e);
         const { value: newValue } = this.props;
         newValue.push('');
         this.props.onChange(e, newValue);
@@ -54,20 +57,26 @@ class Repeated extends Component {
         return (e, value) => {
             const { value: newValue } = this.props;
             newValue[index] = value;
-            this.props.onChange(e, newValue);
+            this.props.onChange(e, [...newValue]);
         };
     };
     renderInput = (value, index) => {
         const { name, typeOrFieldInfo: type } = this.props;
         return (
-            <Input
-                className="tree-input-repeated-item"
+            <div
                 key={index}
-                name={name}
-                type={type}
-                value={value}
-                onChange={this.generateOnChange(index)}
-            />
+                className="tree-input-repeated-item"
+            >
+                <span className="tree-input-repeated-item-index">"{index}": </span>
+                <Input
+                    className="tree-input-repeated-item-input"
+                    key={`${index}-1`}
+                    name={name}
+                    type={type}
+                    value={value}
+                    onChange={this.generateOnChange(index)}
+                />
+            </div>
         );
     };
     renderMessage = (value, index) => {
@@ -97,7 +106,7 @@ class Repeated extends Component {
         const { value, value: { length }, name } = this.props;
         return (
             <div
-                className={`tree-input${collapsed ? ' tree-input-collapsed' : ''}`}
+                className={`tree-input-repeated tree-input${collapsed ? ' tree-input-collapsed' : ''}`}
                 key={name}
             >
                 <div

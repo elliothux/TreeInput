@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { noop, types, typesMap } from '../../utils';
+import { noop, preventDefault } from '../../utils';
 import ExpandIcon from '../../media/expand.svg';
 
 import './index.scss';
@@ -46,9 +46,7 @@ class Enum extends PureComponent {
         }
     };
     handleClick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        e.nativeEvent.stopImmediatePropagation();
+        preventDefault(e);
         this.handleToggleExpand();
     };
     onChange = (e, value) => {
@@ -89,6 +87,7 @@ class Enum extends PureComponent {
                     {
                         fieldInfo.map(i => (
                             <div
+                                key={i.name}
                                 className={`tree-input-enum-option${i.name === value ? ' active' : ''}`}
                                 onClick={(e) => this.onChange(e, i.name)}
                             >

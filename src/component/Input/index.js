@@ -1,5 +1,5 @@
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { noop, types, typesMap } from '../../utils';
@@ -8,7 +8,7 @@ import './index.scss';
 
 
 
-class Input extends PureComponent {
+class Input extends Component {
     static propTypes = {
         name: PropTypes.string.isRequired,
         type: PropTypes.oneOf(types),
@@ -29,6 +29,18 @@ class Input extends PureComponent {
         value: '',
         className: ''
     };
+
+    shouldComponentUpdate(nextProps) {
+        const { value, name, type, className } = this.props;
+        const {
+            value: nextValue,
+            name: nextName,
+            type: nextType,
+            className: nextClassName
+        } = nextProps;
+        return value !== nextValue || name !== nextName ||
+            type !== nextType || className !== nextClassName;
+    }
 
     onChange = (e) => {
         const { onChange } = this.props;

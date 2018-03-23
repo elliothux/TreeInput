@@ -1,0 +1,15 @@
+
+
+.tree-input-repeated {
+  .tree-input-repeated-item {
+    display: inline-block;
+    margin: 10px 20px 5px 0;
+    .tree-input-repeated-item-index {
+      display: inline-block;
+      width: 50px;
+    }
+    .tree-input-repeated-item-input {
+      width: 120px;
+    }
+  }
+}
