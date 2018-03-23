@@ -25,7 +25,22 @@ function preventDefault(e) {
 }
 
 
+function deepCopy(data) {
+    if (typeof data !== 'object' || data === null) return data;
+    return Array.isArray(data) ?
+        [...data].map(i => deepCopy(i)) :
+        Object.keys(data).reduce((accu, k) => {
+            accu[k] = deepCopy(data[k]);
+            return accu;
+        }, {});
+}
+
+
 
 export {
-    noop, types, typesMap, preventDefault
+    types,
+    typesMap,
+    noop,
+    preventDefault,
+    deepCopy
 };

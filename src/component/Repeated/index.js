@@ -7,7 +7,7 @@ import Message from '../Message';
 import CollapsedIcon from '../../media/collapsed.svg';
 import AddIcon from '../../media/add.svg';
 import RemoveIcon from '../../media/remove.svg';
-import { noop, types, preventDefault } from '../../utils';
+import { noop, types, preventDefault, deepCopy } from '../../utils';
 
 import "./index.scss";
 
@@ -62,7 +62,7 @@ class Repeated extends Component {
             value: newValue,
             typeOrFieldInfo: fieldInfo
         } = this.props;
-        newValue.push(fieldInfo);
+        newValue.push(deepCopy(fieldInfo));
         this.props.onChange(e, newValue);
         this.handleToggleCollapsed(e, false);
     };
@@ -117,7 +117,7 @@ class Repeated extends Component {
         const { nestedDepth, collapsed } = this.props;
         return (
             <Message
-                key={name}
+                key={index}
                 value={value || fieldInfo}
                 name={index.toString()}
                 nestedDepth={nestedDepth + 1}

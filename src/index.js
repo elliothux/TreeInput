@@ -32,6 +32,7 @@ class TreeInput extends Component {
                 name, type, label, value, fieldInfo
             } = i;
             let v;
+
             if (label === "REPEATED") {
                 if (!value || value.length === 0) return EMPTY;
                 v = TreeInput.formatRepeated(
@@ -39,9 +40,10 @@ class TreeInput extends Component {
                     type === 'message' ? fieldInfo : type,
                     filterEmpty
                 );
+                if (v === '[]' && filterEmpty) return EMPTY;
             } else if (type === 'message') {
                 v = TreeInput.format(fieldInfo, filterEmpty);
-                if (v === '{}') return EMPTY;
+                if (v === '{}' && filterEmpty) return EMPTY;
             } else {
                 if (filterEmpty && [undefined, null, ''].includes(value)) return EMPTY;
                 if (value === undefined) {
@@ -61,7 +63,10 @@ class TreeInput extends Component {
                 .filter((v) => !!v)
                 .join(',');
         } else {
-            value = value.map((v) => TreeInput.format(v, filterEmpty)).join(',');
+            value = value
+                .map((v) => TreeInput.format(v, filterEmpty))
+                .filter((v) => v !== '{}')
+                .join(',');
         }
         return `[${value}]`;
     };

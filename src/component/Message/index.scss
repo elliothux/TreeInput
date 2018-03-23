@@ -15,7 +15,7 @@
   }
   .tree-input-start {
     left: -7px;
-    display: flex;
+    display: inline-flex;
     justify-content: flex-start;
     align-items: center;
     .tree-input-expand {
@@ -36,6 +36,7 @@
   }
   .tree-input-end {
     left: -3px;
+    display: inline-block;
   }
   .tree-input-items {
     margin-left: 40px;
