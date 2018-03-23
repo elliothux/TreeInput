@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import Input from '../Input';
 import Message from '../Message';
 import CollapsedIcon from '../../media/collapsed.svg';
-import AddIcon from '../../media/add.png';
+import AddIcon from '../../media/add.svg';
+import RemoveIcon from '../../media/remove.svg';
 import { noop, types, preventDefault } from '../../utils';
 
 import "./index.scss";
@@ -37,6 +38,10 @@ class Repeated extends Component {
         };
     }
 
+    get isMessage() {
+        const { typeOrFieldInfo } = this.props;
+        return typeof typeOrFieldInfo !== 'string';
+    }
     state = { collapsed: false };
 
     handleToggleCollapsed = (e, collapsed) => {
@@ -46,10 +51,33 @@ class Repeated extends Component {
                 collapsed : !this.state.collapsed
         });
     };
-    handleAddItem = (e) => {
-        preventDefault(e);
+    handleAddInputItem = (e) => {
         const { value: newValue } = this.props;
         newValue.push('');
+        this.props.onChange(e, newValue);
+        this.handleToggleCollapsed(e, false);
+    };
+    handleAddMessageItem = (e) => {
+        const {
+            value: newValue,
+            typeOrFieldInfo: fieldInfo
+        } = this.props;
+        newValue.push(fieldInfo);
+        this.props.onChange(e, newValue);
+        this.handleToggleCollapsed(e, false);
+    };
+    handleAddItem = (e) => {
+        preventDefault(e);
+        if (this.isMessage) {
+            this.handleAddMessageItem(e);
+        } else {
+            this.handleAddInputItem(e);
+        }
+    };
+    handleRemoveItem = (e, index) => {
+        preventDefault(e);
+        const { value: newValue } = this.props;
+        newValue.splice(index, 1);
         this.props.onChange(e, newValue);
     };
 
@@ -76,6 +104,11 @@ class Repeated extends Component {
                     value={value}
                     onChange={this.generateOnChange(index)}
                 />
+                <img
+                    className="tree-input-remove"
+                    src={RemoveIcon}
+                    onClick={(e) => this.handleRemoveItem(e, index)}
+                />
             </div>
         );
     };
@@ -86,7 +119,7 @@ class Repeated extends Component {
             <Message
                 key={name}
                 value={value || fieldInfo}
-                name={name}
+                name={index.toString()}
                 nestedDepth={nestedDepth + 1}
                 collapsed={collapsed}
                 onChange={this.generateOnChange(index)}
@@ -94,8 +127,7 @@ class Repeated extends Component {
         );
     };
     renderNode = (value, index) => {
-        const { typeOrFieldInfo } = this.props;
-        if (Array.isArray(typeOrFieldInfo)) {
+        if (this.isMessage) {
             return this.renderMessage(value || typeOrFieldInfo, index);
         } else {
             return this.renderInput(value, index);

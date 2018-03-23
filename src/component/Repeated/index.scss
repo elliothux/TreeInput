@@ -2,14 +2,31 @@
 
 .tree-input-repeated {
   .tree-input-repeated-item {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin: 10px 20px 5px 0;
     .tree-input-repeated-item-index {
       display: inline-block;
-      width: 50px;
+      width: 40px;
     }
     .tree-input-repeated-item-input {
       width: 120px;
     }
+  }
+
+  .tree-input-add, .tree-input-remove {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    transition: all ease 300ms;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  .tree-input-add {
+    margin-left: 20px;
+  }
+  .tree-input-remove {
+    margin-left: 10px;
   }
 }

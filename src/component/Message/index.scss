@@ -33,11 +33,6 @@
     .tree-input-name {
       font-weight: bold;
     }
-    .tree-input-add {
-      width: 16px;
-      height: 16px;
-      margin-left: 20px;
-    }
   }
   .tree-input-end {
     left: -3px;
@@ -71,6 +66,7 @@
   .tree-input-item-enum,
   .tree-input-enum-options,
   .tree-input-repeated-item-input {
+    min-width: 150px;
     width: 220px;
     height: 32px;
     line-height: 1.5;
