@@ -17,6 +17,7 @@ class Enum extends PureComponent {
         onPressEnter: PropTypes.func,
         getRef: PropTypes.func,
         value: PropTypes.string,
+        documentation: PropTypes.string,
         className: PropTypes.string
     };
     static defaultProps = {
@@ -24,6 +25,7 @@ class Enum extends PureComponent {
         onPressEnter: noop,
         getRef: noop,
         value: '',
+        documentation: '',
         className: ''
     };
 

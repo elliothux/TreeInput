@@ -18,6 +18,8 @@
     display: inline-flex;
     justify-content: flex-start;
     align-items: center;
+    position: relative;
+    top: 6px;
     .tree-input-expand {
       width: 20px;
       position: relative;

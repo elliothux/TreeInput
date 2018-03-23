@@ -18,7 +18,10 @@ class Message extends Component {
     static propTypes = {
         value: PropTypes.array.isRequired,
         name: PropTypes.string.isRequired,
-        collapsed: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]).isRequired,
+        collapsed: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.bool
+        ]).isRequired,
         nestedDepth: PropTypes.number.isRequired,
         documentation: PropTypes.string,
         onChange: PropTypes.func,

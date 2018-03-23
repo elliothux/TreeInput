@@ -17,12 +17,14 @@ class Boolean extends Component {
             PropTypes.bool,
             PropTypes.string
         ]),
+        documentation: PropTypes.string,
         className: PropTypes.string
     };
     static defaultProps = {
         onChange: noop,
         getRef: noop,
         value: '',
+        documentation: '',
         className: ''
     };
 

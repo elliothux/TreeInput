@@ -19,6 +19,7 @@ class Input extends Component {
             PropTypes.string,
             PropTypes.number
         ]),
+        documentation: PropTypes.string,
         className: PropTypes.string
     };
     static defaultProps = {
@@ -27,6 +28,7 @@ class Input extends Component {
         onPressEnter: noop,
         getRef: noop,
         value: '',
+        documentation: '',
         className: ''
     };
 

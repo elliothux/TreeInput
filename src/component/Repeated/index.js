@@ -23,9 +23,11 @@ class Repeated extends Component {
         ]).isRequired,
         collapsed: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]).isRequired,
         nestedDepth: PropTypes.number.isRequired,
+        documentation: PropTypes.string,
         onChange: PropTypes.func
     };
     static defaultProps = {
+        documentation: '',
         onChange: noop
     };
 
