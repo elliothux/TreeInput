@@ -96,9 +96,9 @@ class TreeInput extends Component {
 
     onChange = (e, value) => {
         this.setState({ value });
-        // const formated = TreeInput.format(value, this.props.filterEmpty);
-        // console.log(formated);
-        // console.log(JSON.parse(formated));
+        const formated = TreeInput.format(value, this.props.filterEmpty);
+        console.log(formated);
+        console.log(JSON.parse(formated));
     };
     render() {
         const { value } = this.state;

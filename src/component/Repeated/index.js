@@ -79,6 +79,10 @@ class Repeated extends Component {
         const { value: newValue } = this.props;
         newValue.splice(index, 1);
         this.props.onChange(e, newValue);
+
+        if (newValue.length === 0) {
+            this.handleToggleCollapsed(e, true);
+        }
     };
 
     generateOnChange = (index) => {
@@ -158,7 +162,7 @@ class Repeated extends Component {
                         <span>"{name}": </span>
                         <Tooltip text={documentation}/>
                     </div>
-                    <span className="tree-input-item-type"> {isMessage ? 'message' : typeOrFieldInfo}</span>
+                    <span className="tree-input-item-type"> {isMessage ? 'message' : typeOrFieldInfo}[]</span>
                     <span className="tree-input-tag">[</span>
                     <span className={collapsed ? '' : 'tree-input-hide'}>
                         <span if={length > 0}>...</span>

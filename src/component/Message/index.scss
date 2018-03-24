@@ -24,12 +24,14 @@
     align-items: center;
     position: relative;
     top: 3px;
+    background-color: $background-color;
     .tree-input-expand {
-      width: 20px;
       position: relative;
       left: -3px;
+      top: -1px;
       transition: all ease 300ms;
       transform: rotate(90deg);
+      color: rgb(231, 49, 49);
     }
     .tree-input-count, .tree-input-count-empty {
       display: inline-block;
@@ -119,6 +121,7 @@
   border-left: none;
   .tree-input-start {
     .tree-input-expand {
+      color: inherit;
       transform: rotate(0deg);
     }
   }

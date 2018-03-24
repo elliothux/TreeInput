@@ -1,6 +1,23 @@
 
+@import "../../variables";
+
 
 .tree-input-repeated {
+  .tree-input, .tree-input-repeated-item {
+    animation: repeated-item-init ease 300ms forwards;
+    transform: translateX(100px);
+    opacity: 0.3;
+    @keyframes repeated-item-init {
+      from {
+        transform: translateX(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  }
   .tree-input-repeated-item {
     display: inline-flex;
     align-items: center;
@@ -15,17 +32,19 @@
   }
 
   .tree-input-add, .tree-input-remove {
-    font-size: 22px;
+    font-size: 24px;
     cursor: pointer;
     transition: all ease 300ms;
     &:hover {
-      transform: scale(1.2);
+      transform: scale(1.3) rotate(-180deg);
     }
   }
   .tree-input-add {
     margin-left: 26px;
+    color: $default-color;
   }
   .tree-input-remove {
     margin-left: 10px;
+    color: $danger-color;
   }
 }
