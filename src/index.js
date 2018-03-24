@@ -16,13 +16,15 @@ class TreeInput extends Component {
         rootName: PropTypes.string,
         collapsed: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
         onChange: PropTypes.func,
-        filterEmpty: PropTypes.bool
+        filterEmpty: PropTypes.bool,
+        warnEmpty: PropTypes.bool
     };
     static defaultProps = {
         rootName: 'Root',
         collapsed: true,
         onChange: noop,
-        filterEmpty: true
+        filterEmpty: true,
+        warnEmpty: false
     };
 
     // Format Value to JSON

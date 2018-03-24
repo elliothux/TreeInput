@@ -24,12 +24,14 @@ class Message extends Component {
         nestedDepth: PropTypes.number.isRequired,
         documentation: PropTypes.string,
         onChange: PropTypes.func,
-        onRemove: PropTypes.func
+        onRemove: PropTypes.func,
+        warnEmpty: PropTypes.bool
     };
     static defaultProps = {
         documentation: '',
         onChange: noop,
-        onRemove: noop
+        onRemove: noop,
+        warnEmpty: false
     };
 
     constructor(...args) {
