@@ -207,7 +207,7 @@ class Message extends Component {
                     > message</span>
                     <span className="tree-input-tag">{"\u007b"}</span>
                     <span className={collapsed ? '' : 'tree-input-hide'}>
-                        <span if={length > 0}>...</span>
+                        <span if={length > 0} className="tree-input-points">...</span>
                         <span className="tree-input-tag">}</span>
                     </span>
                     <span if={length === 0} className="tree-input-count-empty">Empty</span>

@@ -31,14 +31,14 @@
       top: -1px;
       transition: all ease 300ms;
       transform: rotate(90deg);
-      color: rgb(231, 49, 49);
     }
     .tree-input-count, .tree-input-count-empty {
       display: inline-block;
-      margin-left: 30px;
+      margin-left: 20px;
       opacity: 0.8;
       font-style: italic;
       color: $count-color;
+      min-width: 60px;
     }
     .tree-input-name {
       font-weight: bold;
@@ -47,7 +47,7 @@
       font-size: 15px;
     }
     .tree-input-item-type {
-      margin-right: 30px;
+      margin-right: 20px;
       font-style: italic;
     }
     .tree-input-tag {
@@ -81,10 +81,6 @@
           font-weight: bolder;
           cursor: pointer;
           display: inline-block;
-        }
-        .tree-input-item-type {
-          font-style: italic;
-          margin-right: 30px;
         }
       }
     }

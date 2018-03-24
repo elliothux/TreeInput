@@ -8,10 +8,6 @@
   padding: 0 !important;
   position: relative;
   &.active {
-    box-shadow: 0 0 4px 1px rgba(59, 169, 255, 0.71);
-    border-color: #40a9ff !important;
-    .tree-input-item-enum-value {
-    }
     .tree-input-item-expand-icon {
       transform: rotate(180deg);
     }
@@ -24,10 +20,9 @@
     justify-content: space-between;
     align-items: center;
     .tree-input-item-expand-icon {
-      width: 18px;
-      height: 18px;
+      font-size: 15px;
       position: relative;
-      left: 5px;
+      left: 4px;
       transition: all ease 300ms;
     }
   }
@@ -46,13 +41,6 @@
       line-height: 28px;
       background-color: $background-color;
       transition: all ease 200ms;
-      &.active {
-        font-weight: bold;
-        background-color: #c6f1ff;
-      }
-      &:hover, &.active {
-          background-color: rgb(156, 221, 255);
-      }
     }
   }
 }

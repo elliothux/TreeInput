@@ -99,7 +99,7 @@ class Repeated extends Component {
                 key={index}
                 className="tree-input-repeated-item"
             >
-                <span className="tree-input-repeated-item-index">"{index}": </span>
+                <span className="tree-input-repeated-item-index">{index}: </span>
                 <Input
                     className="tree-input-repeated-item-input"
                     key={`${index}-1`}
@@ -147,6 +147,7 @@ class Repeated extends Component {
             typeOrFieldInfo
         } = this.props;
         const isMessage = typeof typeOrFieldInfo !== 'string';
+        const isEmpty = length === 0;
         return (
             <div
                 className={`tree-input-repeated tree-input${
@@ -165,10 +166,10 @@ class Repeated extends Component {
                     <span className="tree-input-item-type"> {isMessage ? 'message' : typeOrFieldInfo}[]</span>
                     <span className="tree-input-tag">[</span>
                     <span className={collapsed ? '' : 'tree-input-hide'}>
-                        <span if={length > 0}>...</span>
+                        <span className={`tree-input-points${isEmpty ? ' tree-input-hide': ''}`}>...</span>
                         <span className="tree-input-tag">]</span>
                     </span>
-                    <span if={length === 0} className="tree-input-count-empty">Empty</span>
+                    <span if={isEmpty} className="tree-input-count-empty">Empty</span>
                     <span else className="tree-input-count">{length} Items</span>
                     <i
                         className="tree-input-add icon-add"

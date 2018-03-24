@@ -48,7 +48,7 @@ class Boolean extends Component {
         return (
             <div
                 key={name}
-                className={`tree-input-item-boolean ${className}`}
+                className={`tree-input-item-boolean ${value === false ? 'tree-input-false' : ''} ${className}`}
             >
                 <div
                     className={value === true ? 'tree-input-boolean-active' : ''}

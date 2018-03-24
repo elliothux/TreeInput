@@ -17,14 +17,6 @@
     &:first-child {
       width: calc(50% - 1px);
       border-right: 1px solid #d9d9d9;
-      &:hover, &.tree-input-boolean-active {
-        background-color: #3d93e3;
-      }
-    }
-    &:last-child {
-      &:hover, &.tree-input-boolean-active {
-        background-color: #ff4f58;
-      }
     }
   }
 }

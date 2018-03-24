@@ -6,7 +6,6 @@
     .tree-input-hide {
         opacity: 0;
     }
-
     .tree-input-name, .tree-input-item-name {
         .tree-input-tooltip {
             transform: scale(0.1) translateY(100%);
@@ -19,13 +18,164 @@
             }
         }
     }
+    .tree-input-points {
+        font-weight: bolder;
+        font-size: 16px;
+        line-height: 5px;
+        letter-spacing: -0.1em;
+    }
+    .tree-input-tag {
+        font-weight: bolder;
+    }
 
-    .double, .float, .int32, .int64,
-    .uint32, .uint64, .sint32, .sint64,
-    .fixed32, .fixed64, .sfixed32, .sfixed64,
-    .bool, .string, .bytes, .enum, .message, .boolean {
-        .tree-input-item-type {
-            color: rgb(203, 75, 22);
+
+    // Colors
+    .tree-input-repeated {
+        .tree-input-add {
+            color: rgb(72, 184, 245);
+        }
+        .tree-input-remove {
+            color: rgb(243, 93, 111);
+        }
+    }
+    .message {
+        .tree-input-item-type,
+        .tree-input-expand,
+        .tree-input-points {
+            color: rgb(243, 93, 111);
+        }
+    }
+    .boolean {
+        .tree-input-item-type,
+        .tree-input-expand,
+        .tree-input-points {
+            color: rgb(51, 211, 145);
+        }
+        .tree-input-item-boolean {
+            border-color: rgba(51, 211, 145, 0.4);
+            &.tree-input-false {
+                border-color: rgba(243, 7, 3, 0.44);
+                & > div:first-child {
+                    border-color: white;
+                }
+            }
+            &:hover > div:first-child {
+                border-right-color: #FFFF;
+            }
+            & > div:first-child {
+                border-color: rgba(51, 211, 145, 0.4);
+                color: rgb(51, 211, 145);
+                &:hover, &.tree-input-boolean-active {
+                    background-color: rgb(51, 211, 145);
+                    color: white;
+                }
+            }
+            & > div:last-child {
+                color: rgb(243, 93, 111);
+                &:hover, &.tree-input-boolean-active {
+                    background-color: rgb(243, 93, 111);
+                    color: white;
+                }
+            }
+        }
+    }
+    .enum {
+        .tree-input-item-type,
+        .tree-input-expand,
+        .tree-input-points {
+            color: rgb(200, 78, 230);
+        }
+        .tree-input-item-enum {
+            .tree-input-item-enum-value {
+                .tree-input-item-expand-icon {
+                    color: rgb(208, 36, 208);
+                }
+            }
+            color: rgb(200, 78, 230);
+            border-color: rgba(200, 78, 230, 0.4);
+            &.active, .tree-input-enum-options {
+                border-color: rgb(200, 78, 230);
+                box-shadow: 0 0 4px 1px rgba(200, 78, 230, 0.71);
+            }
+            .tree-input-enum-options {
+                .tree-input-enum-option {
+                    &.active {
+                        font-weight: bold;
+                        background-color: rgb(221, 104, 217);
+                        color: white;
+                    }
+                    &:hover {
+                        color: white;
+                        background-color: rgb(191, 92, 205);
+                    }
+                }
+            }
+        }
+    }
+    .string, .bytes {
+        .tree-input-item-type,
+        .tree-input-expand,
+        .tree-input-points,
+        .tree-input-item-input, .tree-input-repeated-item-input {
+            color: rgb(233, 120, 42);
+        }
+        .tree-input-item-input, .tree-input-repeated-item-input {
+            border-color: rgba(233, 120, 42, 0.4);
+            &:focus {
+                border-color: rgb(233, 120, 42);
+                box-shadow: 0 0 4px 1px rgba(233, 120, 42, 0.71);
+            }
+        }
+    }
+    .double, .float {
+        .tree-input-item-type,
+        .tree-input-expand,
+        .tree-input-points,
+        .tree-input-item-input,
+        .tree-input-repeated-item-input {
+            color: rgb(133, 153, 0);
+        }
+        .tree-input-item-input,
+        .tree-input-repeated-item-input {
+            border-color: rgba(133, 153, 0, 0.4);
+            &:focus {
+                border-color: rgb(133, 153, 0);
+                box-shadow: 0 0 4px 1px rgba(133, 153, 0, 0.71);
+            }
+        }
+    }
+    .int32, .uint32, .sint32, .fixed32, .sfixed32 {
+        .tree-input-item-type,
+        .tree-input-expand,
+        .tree-input-points,
+        .tree-input-item-input,
+        .tree-input-repeated-item-input {
+            color: rgb(35, 173, 219);
+        }
+        .tree-input-item-input,
+        .tree-input-repeated-item-input {
+            border-color: rgba(35, 173, 219, 0.4);
+            &:focus {
+                border-color: rgb(35, 173, 219);
+                box-shadow: 0 0 4px 1px rgba(35, 173, 219, 0.71);
+            }
+        }
+    }
+    .int64, .uint64, .sint64, .fixed64,  .sfixed64 {
+        .tree-input-item-type,
+        .tree-input-expand,
+        .tree-input-points,
+        .tree-input-item-input,
+        .tree-input-repeated-item-input {
+            color: rgb(78, 134, 222);
+        }
+        .tree-input-item-input,
+        .tree-input-repeated-item-input {
+            border-color: rgba(78, 134, 222, 0.4);
+            &:focus {
+                border-color: rgb(78, 134, 222);
+                box-shadow: 0 0 4px 1px rgba(78, 134, 222, 0.71);
+            }
         }
     }
 }

@@ -3,28 +3,29 @@
 
 
 .tree-input-repeated {
-  .tree-input, .tree-input-repeated-item {
-    animation: repeated-item-init ease 300ms forwards;
-    transform: translateX(100px);
-    opacity: 0.3;
-    @keyframes repeated-item-init {
-      from {
-        transform: translateX(100px);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-  }
+  //.tree-input, .tree-input-repeated-item {
+  //  animation: repeated-item-init ease 300ms forwards;
+  //  transform: translateX(100px);
+  //  opacity: 0.3;
+  //  @keyframes repeated-item-init {
+  //    from {
+  //      transform: translateX(100px);
+  //      opacity: 0;
+  //    }
+  //    to {
+  //      transform: translateX(0);
+  //      opacity: 1;
+  //    }
+  //  }
+  //}
   .tree-input-repeated-item {
     display: inline-flex;
     align-items: center;
     margin: 10px 20px 5px 0;
     .tree-input-repeated-item-index {
       display: inline-block;
-      width: 40px;
+      width: 30px;
+      font-weight: bolder;
     }
     .tree-input-repeated-item-input {
       width: 120px;
@@ -41,10 +42,8 @@
   }
   .tree-input-add {
     margin-left: 26px;
-    color: $default-color;
   }
   .tree-input-remove {
     margin-left: 10px;
-    color: $danger-color;
   }
 }
