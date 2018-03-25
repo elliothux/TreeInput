@@ -72,7 +72,8 @@ class Enum extends PureComponent {
                 onClick={this.handleClick}
             >
                 <div className="tree-input-item-enum-value">
-                    <span>{value}</span>
+                    <span if={value.trim()}>{value}</span>
+                    <span else className="tree-input-place-holder">{name}: enum</span>
                     <i className="tree-input-item-expand-icon icon-expand"/>
                 </div>
                 <div

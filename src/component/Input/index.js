@@ -56,12 +56,12 @@ class Input extends Component {
     };
     render() {
         const {
-            value, name, type, className, documentation
+            value, name, type, className
         } = this.props;
         return (
             <input
                 type="text"
-                className={className}
+                className={`tree-input-input-field ${className}`}
                 value={value}
                 placeholder={`${name}: ${type}`}
                 onChange={this.onChange}

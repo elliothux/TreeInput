@@ -46,10 +46,6 @@
       margin-right: 8px;
       font-size: 15px;
     }
-    .tree-input-item-type {
-      margin-right: 20px;
-      font-style: italic;
-    }
     .tree-input-tag {
       margin: 0 8px;
     }
@@ -101,8 +97,11 @@
     color: rgba(0, 0, 0, 0.65);
     transition: all ease 300ms;
     background: transparent;
-    &::placeholder {
-      color: rgb(194, 194, 194);
+    &::placeholder, .tree-input-place-holder {
+      font-family: $font-family;
+      font-size: 13px;
+      opacity: 0.8;
+      color: rgb(182, 182, 182);
     }
     &:focus {
       border-color: #40a9ff;
