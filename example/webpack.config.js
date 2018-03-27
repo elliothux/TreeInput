@@ -12,18 +12,18 @@ module.exports = {
         path: path.join(__dirname, "dist"),
         filename: 'index.js'
     },
-    mode: 'development',
+    // mode: 'development',
     plugins: [
         new HtmlWebpackPlugin({
             hash: true,
             filename: './index.html'
         }),
-        // new ExtractTextPlugin('index.css')
+        new ExtractTextPlugin('index.css')
     ],
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         compress: false,
-        port: Math.floor(Math.random() * 200) + 2000,
+        port: 2334,
         open: true
     },
     module: {
