@@ -17,12 +17,10 @@ module.exports = {
         publicPath: '/',
         umdNamedDefine: true
     },
-    mode: "production",
-    // plugins: [
-    //     new ExtractTextPlugin({
-    //         filename: 'index.css',
-    //     }),
-    // ],
+    // mode: "production",
+    plugins: [
+        new ExtractTextPlugin('index.css')
+    ],
     module: {
         rules : [
             {
@@ -51,17 +49,7 @@ module.exports = {
         }
     },
     externals: {
-        react: {
-            commonjs: "react",
-            commonjs2: "react",
-            amd: "React",
-            root: "React"
-        },
-        "react-dom": {
-            commonjs: "react-dom",
-            commonjs2: "react-dom",
-            amd: "ReactDOM",
-            root: "ReactDOM"
-        }
+        react: 'react',
+        "react-dom": 'react-dom'
     }
 };

@@ -44,9 +44,11 @@
   .tree-input-repeated {
     .tree-input-add {
       color: rgb(72, 184, 245);
+      fill: rgb(72, 184, 245);
     }
     .tree-input-remove {
       color: rgb(243, 93, 111);
+      fill: rgb(243, 93, 111);
     }
   }
   .message {
@@ -54,6 +56,7 @@
     .tree-input-expand,
     .tree-input-points {
       color: rgb(243, 93, 111);
+      fill: rgb(243, 93, 111);
     }
   }
   .boolean {
@@ -61,6 +64,7 @@
     .tree-input-expand,
     .tree-input-points {
       color: rgb(51, 211, 145);
+      fill: rgb(51, 211, 145);
     }
     .tree-input-item-boolean {
       border-color: rgba(51, 211, 145, 0.4);
@@ -95,6 +99,7 @@
     .tree-input-expand,
     .tree-input-points {
       color: rgb(200, 78, 230);
+      fill: rgb(200, 78, 230);
     }
     .tree-input-item-enum {
       .tree-input-item-enum-value {
@@ -129,6 +134,7 @@
     .tree-input-points,
     .tree-input-item-input, .tree-input-repeated-item-input {
       color: rgb(233, 120, 42);
+      fill: rgb(233, 120, 42);
     }
     .tree-input-item-input, .tree-input-repeated-item-input {
       border-color: rgba(233, 120, 42, 0.4);
@@ -145,6 +151,7 @@
     .tree-input-item-input,
     .tree-input-repeated-item-input {
       color: rgb(133, 153, 0);
+      fill: rgb(133, 153, 0);
     }
     .tree-input-item-input,
     .tree-input-repeated-item-input {
@@ -162,6 +169,7 @@
     .tree-input-item-input,
     .tree-input-repeated-item-input {
       color: rgb(35, 173, 219);
+      fill: rgb(35, 173, 219);
     }
     .tree-input-item-input,
     .tree-input-repeated-item-input {
@@ -179,6 +187,7 @@
     .tree-input-item-input,
     .tree-input-repeated-item-input {
       color: rgb(78, 134, 222);
+      fill: rgb(78, 134, 222);
     }
     .tree-input-item-input,
     .tree-input-repeated-item-input {
@@ -189,47 +198,4 @@
       }
     }
   }
-}
-
-// Icon-font
-@font-face {
-  font-family: 'icomoon';
-  src: url('./media/fonts/icomoon.eot?mxr1yi');
-  src: url('./media/fonts/icomoon.eot?mxr1yi#iefix') format('embedded-opentype'),
-  url('./media/fonts/icomoon.ttf?mxr1yi') format('truetype'),
-  url('./media/fonts/icomoon.woff?mxr1yi') format('woff'),
-  url('./media/fonts/icomoon.svg?mxr1yi#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-[class^="icon-"], [class*=" icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-add:before {
-  content: "\e900";
-}
-
-.icon-expand:before {
-  content: "\e901";
-}
-
-.icon-collapsed:before {
-  content: "\e902";
-}
-
-.icon-remove:before {
-  content: "\e903";
 }

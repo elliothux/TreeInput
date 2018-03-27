@@ -7,6 +7,7 @@ import Enum from '../Enum';
 import Boolean from '../Boolean';
 import Repeated from '../Repeated';
 import Tooltip from '../Tooltip';
+import Icon from '../Icon';
 import { noop, preventDefault } from '../../utils';
 
 import './index.scss';
@@ -198,7 +199,7 @@ class Message extends Component {
                     className="tree-input-start"
                     onClick={this.handleToggleCollapsed}
                 >
-                    <i className="tree-input-expand icon-collapsed"/>
+                    <Icon type="COLLAPSED" className="tree-input-expand"/>
                     <div className="tree-input-name">
                         <span>"{name}": </span>
                         <Tooltip text={documentation} />
@@ -214,7 +215,8 @@ class Message extends Component {
                     </span>
                     <span if={length === 0} className="tree-input-count-empty">Empty</span>
                     <span else className="tree-input-count">{length} Items</span>
-                    <i
+                    <Icon
+                        type="REMOVE"
                         if={onRemove !== noop}
                         className="tree-input-remove icon-remove"
                         onClick={onRemove}

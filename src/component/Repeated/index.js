@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Input from '../Input';
 import Message from '../Message';
+import Icon from '../Icon';
 import { noop, types, preventDefault, deepCopy } from '../../utils';
 
 import "./index.scss";
@@ -108,7 +109,8 @@ class Repeated extends Component {
                     value={value}
                     onChange={this.generateOnChange(index)}
                 />
-                <i
+                <Icon
+                    type="REMOVE"
                     className="tree-input-remove icon-remove"
                     onClick={(e) => this.handleRemoveItem(e, index)}
                 />
@@ -158,7 +160,7 @@ class Repeated extends Component {
                     className="tree-input-start"
                     onClick={this.handleToggleCollapsed}
                 >
-                    <i className="tree-input-expand icon-collapsed"/>
+                   <Icon type="COLLAPSED" className="tree-input-expand"/>
                     <div className="tree-input-name">
                         <span>"{name}": </span>
                         <Tooltip text={documentation}/>
@@ -171,7 +173,8 @@ class Repeated extends Component {
                     </span>
                     <span if={isEmpty} className="tree-input-count-empty">Empty</span>
                     <span else className="tree-input-count">{length} Items</span>
-                    <i
+                    <Icon
+                        type="ADD"
                         className="tree-input-add icon-add"
                         onClick={this.handleAddItem}
                     />
