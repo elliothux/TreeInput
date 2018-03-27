@@ -1,17 +1,31 @@
 
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 module.exports = {
     entry: {
-        example: path.join(__dirname, './example/index.js')
+        example: path.join(__dirname, './src')
     },
     output: {
-        path: path.join(__dirname, './example/'),
-        filename: '[name].build.js',
-        publicPath: '/assets/'
+        path: path.join(__dirname, "dist"),
+        filename: 'index.js'
     },
     mode: 'development',
+    plugins: [
+        new HtmlWebpackPlugin({
+            hash: true,
+            filename: './index.html'
+        }),
+        // new ExtractTextPlugin('index.css')
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, "dist"),
+        compress: false,
+        port: Math.floor(Math.random() * 200) + 2000,
+        open: true
+    },
     module: {
         rules: [
             {

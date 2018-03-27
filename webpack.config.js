@@ -1,28 +1,56 @@
 
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const pkg = require('./package.json');
 const path = require('path');
+
+const libraryName= pkg.name;
 
 
 module.exports = {
-    entry: {
-        index: path.join(__dirname, './src/index.js')
-    },
+    entry: path.join(__dirname, "./src/index.js"),
     output: {
-        path: path.join(__dirname, './dist/'),
+        path: path.join(__dirname, './dist'),
         filename: 'index.js',
-        publicPath: '/assets/',
-        library: 'tree-input',
+        library: libraryName,
         libraryTarget: 'umd',
+        publicPath: '/',
         umdNamedDefine: true
     },
-    mode: 'development',
+    mode: "production",
+    // plugins: [
+    //     new ExtractTextPlugin({
+    //         filename: 'index.css',
+    //     }),
+    // ],
+    module: {
+        rules : [
+            {
+                test: /\.s[a|c]ss$/,
+                use : [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
+            },
+            {
+                test: /\.(js|jsx)$/,
+                use: ["babel-loader"],
+                include: path.resolve(__dirname, "src"),
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.(eot|ttf|woff|woff2|svg)$/,
+                use: ["file-loader"],
+            }]
+    },
     resolve: {
         alias: {
-            'react': path.resolve(__dirname, './node_modules/react'),
-            'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
+            'react': path.resolve(__dirname, './node_modules/react') ,
+            'react-dom': path.resolve(__dirname, './node_modules/react-dom')
         }
     },
     externals: {
-        // Don't bundle react or react-dom
         react: {
             commonjs: "react",
             commonjs2: "react",
@@ -35,31 +63,5 @@ module.exports = {
             amd: "ReactDOM",
             root: "ReactDOM"
         }
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js/,
-                use: 'babel-loader',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: 'style-loader!css-loader'
-            },
-            {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                use: "file-loader"
-            },
-            {
-                test: /\.(ttf|eot|svg|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "file-loader"
-            },
-            {
-                test: /\.s[a|c]ss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
-            }
-        ]
-    },
-    target: 'web'
+    }
 };

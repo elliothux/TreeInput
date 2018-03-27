@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import TreeInput from '../dist/';
+import TreeInput from '../../';
 
 import './index.scss';
 
@@ -183,8 +183,7 @@ const App = () => (
     <TreeInput schema={schema} collapsed={2}/>
 );
 
+const container = document.createElement('div');
+document.body.appendChild(container);
 
-render(
-    <App/>,
-    document.getElementById('root')
-);
+render(<App/>, container);

@@ -1,13 +1,17 @@
 {
   "name": "tree-input",
   "version": "0.0.3",
-  "main": "dist",
+  "main": "./dist",
   "repository": "https://github.com/HuQingyang/TreeInput",
   "author": "胡青杨 <i@do.codes>",
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --hot --inline --cache --devtool eval --port 2333",
-    "example": "webpack-dev-server --config webpack.example.js --hot --inline --cache --devtool eval --port 2334"
+    "build": "webpack"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -18,18 +22,15 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.1.0",
     "node-sass": "^4.7.2",
     "prop-types": "^15.6.1",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
     "url-loader": "^1.0.1",
-    "webpack": "^4.2.0",
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.1"
-  },
-  "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
   }
 }
