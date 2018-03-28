@@ -32,6 +32,22 @@ class Input extends Component {
         className: ''
     };
 
+    get isNumber() {
+        const { type } = this.props;
+        const invalid = [typesMap.BOOL, typesMap.STRING, typesMap.BYTES, typesMap.ENUM];
+        return !invalid.includes(type);
+    }
+    get hasPoint() {
+        const { type } = this.props;
+        const valid = [typesMap.DOUBLE, typesMap.FLOAT, typesMap];
+        return valid.includes(type);
+    }
+    get hasNegative() {
+        const { type } = this.props;
+        const invalid = [typesMap.UINT32, typesMap.UINT64];
+        return !invalid.includes(type);
+    }
+
     shouldComponentUpdate(nextProps) {
         const { value, name, type, className } = this.props;
         const {
@@ -45,13 +61,33 @@ class Input extends Component {
     }
 
     onChange = (e) => {
-        const { onChange } = this.props;
+        const { onChange, value: preValue } = this.props;
         const { value } = e.target;
         const formated = this.format(value);
+        if (formated === preValue) return;
         const event = { ...e, value: formated, component: this };
         onChange(event, formated, value);
     };
     format = (value) => {
+        const { isNumber, hasPoint, hasNegative } = this;
+        if (!isNumber) return value;
+        const match = value.match(/[\d.-]/g);
+        if (!match) return '';
+        value = match.join('');
+
+        if (hasPoint) {
+            const match = value.match(/-?\d+\.?\d*/);
+            value = match ? match[0] : '';
+        } else {
+            value = value.replace(/\./g, '');
+        }
+
+        if (hasNegative) {
+            const isNegative = value[0] === '-';
+            value = `${isNegative ? '-' :　''}${value.replace(/-/g, '')}`;
+        } else {
+            value = value.replace(/-/g, '');
+        }
         return value;
     };
     render() {

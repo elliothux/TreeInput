@@ -19,7 +19,7 @@ const schema = [
         "name": "uid_type",
         "documentation": "用户类型\r",
         "label": "OPTIONAL",
-        "type": "uint32"
+        "type": "int32"
     },
     {
         "tag": 3,

@@ -16,7 +16,7 @@
   }
   .tree-input-name, .tree-input-item-name {
     .tree-input-tooltip {
-      transform: scale(0.1) translateY(-100%);
+      transform: scale(0.1) translateY(calc(-100% - 16px));
       opacity: 0;
     }
     &:hover {
@@ -38,6 +38,7 @@
   .tree-input-item-type {
     margin-right: 20px;
     font-style: italic;
+    font-size: 14px;
   }
 
   // Colors
