@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from '../Icon';
 import { noop, preventDefault } from '../../utils';
 
 import './index.scss';
@@ -74,7 +75,7 @@ class Enum extends PureComponent {
                 <div className="tree-input-item-enum-value">
                     <span if={value.trim()}>{value}</span>
                     <span else className="tree-input-place-holder">{name}: enum</span>
-                    <i className="tree-input-item-expand-icon icon-expand"/>
+                    <Icon type={Icon.types.ARROW} className="tree-input-item-expand-icon"/>
                 </div>
                 <div
                     className="tree-input-enum-options"

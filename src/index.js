@@ -118,4 +118,6 @@ class TreeInput extends Component {
 }
 
 
-export default TreeInput;
+export {
+    TreeInput
+};

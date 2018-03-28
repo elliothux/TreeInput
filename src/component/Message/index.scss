@@ -26,8 +26,8 @@
     top: 3px;
     background-color: $background-color;
     .tree-input-expand {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       fill: black;
       position: relative;
       left: -3px;
@@ -120,6 +120,7 @@
   .tree-input-start {
     .tree-input-expand {
       color: inherit;
+      fill: inherit;
       transform: rotate(0deg);
     }
   }
