@@ -2,13 +2,13 @@
 .tree-input-tooltip {
   $tooltip-color: rgb(41, 41, 41);
   position: absolute;
+  max-width: 200px;
   background-color: $tooltip-color;
   color: white;
   font-weight: bold;
   padding: 6px 11px;
   border-radius: 4px;
-  top: -34px;
-  transition: all ease 200ms;
+  transition: all ease-out 200ms;
   box-shadow: rgba(0, 0, 0, 0.07) 3px 3px 7px 0;
   font-size: 13px;
   .tree-input-tooltip-arrow {

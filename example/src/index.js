@@ -10,7 +10,7 @@ const schema = [
     {
         "tag": 1,
         "name": "uin",
-        "documentation": "uin\r",
+        "documentation": "uin",
         "label": "OPTIONAL",
         "type": "uint64"
     },
@@ -95,7 +95,7 @@ const schema = [
             "type": "string"
         }],
         "name": "valueMap",
-        "documentation": "定时器透传的参数\r",
+        "documentation": "定时器透传的参数: 1. uin; 2. cid; 3. name; 4. fieldInfo; 5. tid;",
         "label": "REPEATED",
         "type": "message"
     },
