@@ -87,7 +87,8 @@ const schema = [
             "fieldInfo": [{"tag": 0, "name": "LONG_VALUE"}, {"tag": 1, "name": "STRING_VALUE"}],
             "name": "type",
             "label": "REQUIRED",
-            "type": "enum"
+            "type": "enum",
+            "value": [{"tag": 1, "name": "STRING_VALUE"}]
         }, {"tag": 3, "name": "longValue", "label": "OPTIONAL", "type": "uint64"}, {
             "tag": 4,
             "name": "strValue",

@@ -42,6 +42,7 @@
       padding: 4px 11px;
       height: 28px;
       line-height: 28px;
+      box-sizing: content-box;
       background-color: $background-color;
       transition: all ease 200ms;
     }

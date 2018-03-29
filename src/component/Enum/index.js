@@ -16,7 +16,7 @@ class Enum extends PureComponent {
         onChange: PropTypes.func,
         onPressEnter: PropTypes.func,
         getRef: PropTypes.func,
-        value: PropTypes.string,
+        value: PropTypes.array,
         documentation: PropTypes.string,
         className: PropTypes.string
     };
@@ -24,7 +24,7 @@ class Enum extends PureComponent {
         onChange: noop,
         onPressEnter: noop,
         getRef: noop,
-        value: '',
+        value: [{}],
         documentation: '',
         className: ''
     };
@@ -53,12 +53,8 @@ class Enum extends PureComponent {
     };
     onChange = (e, value) => {
         const { onChange } = this.props;
-        const formated = this.format(value);
-        const event = { ...e, value: formated, component: this };
-        onChange(event, formated, value);
-    };
-    format = (value) => {
-        return value;
+        const event = { ...e, value, component: this };
+        onChange(event, [value], [value]);
     };
     render() {
         const {
@@ -66,21 +62,23 @@ class Enum extends PureComponent {
         } = this.props;
         const { length } = fieldInfo;
         const { expand } = this.state;
+        const [{ name: valueName }] = value;
         return (
             <div
                 key={name}
                 className={`tree-input-item-enum ${className}${expand ? ' active' : ''}`}
                 onClick={this.handleClick}
+                style={{ zIndex: expand ? 99 : 3 }}
             >
                 <div className="tree-input-item-enum-value">
-                    <span if={value.trim()}>{value}</span>
+                    <span if={valueName}>{valueName}</span>
                     <span else className="tree-input-place-holder">{name}: enum</span>
                     <Icon type={Icon.types.ARROW} className="tree-input-item-expand-icon"/>
                 </div>
                 <div
                     className="tree-input-enum-options"
                     style={{
-                        height: expand ? `${length * (28 + 8)}px` : 0,
+                        height: expand ? `${length * 36}px` : 0,
                         opacity: expand ? 1 : 0
                     }}
                 >
@@ -88,8 +86,8 @@ class Enum extends PureComponent {
                         fieldInfo.map(i => (
                             <div
                                 key={i.name}
-                                className={`tree-input-enum-option${i.name === value ? ' active' : ''}`}
-                                onClick={(e) => this.onChange(e, i.name)}
+                                className={`tree-input-enum-option${i.name === valueName ? ' active' : ''}`}
+                                onClick={(e) => this.onChange(e, i)}
                             >
                                 {i.name}
                             </div>
