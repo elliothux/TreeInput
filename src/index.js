@@ -117,7 +117,10 @@ class TreeInput extends Component {
     }
 }
 
+const { format } = TreeInput;
+
 
 export {
-    TreeInput
+    TreeInput,
+    format
 };

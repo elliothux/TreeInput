@@ -3,7 +3,8 @@
 
 
 .tree-input-root {
-  margin-left: 40px;
+  margin: 0 0 0 40px;
+  padding: 0;
   font-family: $font-family;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -16,7 +17,7 @@
   }
   .tree-input-name, .tree-input-item-name {
     .tree-input-tooltip {
-      transform: scale(0.1) translateY(calc(-100% - 16px));
+      transform: scale(0.1) translateY(calc(-200% - 26px));
       opacity: 0;
     }
     &:hover {
