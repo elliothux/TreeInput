@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "react",
+    "eslint-config-imweb"
+  ],
+  "settings": {
+    "import/resolver": "webpack"
+  },
+  "rules": {
+    "import/extensions": 0
+  }
+}

@@ -1,32 +1,30 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import './index.scss';
 
 
-
-class Tooltip extends Component {
-    static propTypes = {
-        text: PropTypes.string
-    };
-    static defaultProps = {
-        text: ''
-    };
-
-    render() {
-        const { text } = this.props;
-        return (
-            <div
-                if={text.trim()}
-                className="tree-input-tooltip"
-            >
-                <span>{text}</span>
-                <div className="tree-input-tooltip-arrow"/>
-            </div>
-        );
-    }
+function Tooltip(props) {
+  const { text } = props;
+  return (
+    <div
+      if={text.trim()}
+      className="tree-input-tooltip"
+    >
+      <span>{text}</span>
+      <div className="tree-input-tooltip-arrow" />
+    </div>
+  );
 }
+
+Tooltip.propTypes = {
+  text: PropTypes.string,
+};
+
+Tooltip.defaultProps = {
+  text: '',
+};
 
 
 export default Tooltip;
