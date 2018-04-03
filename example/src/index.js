@@ -182,7 +182,7 @@ const schema = [
 const App = () => (
   <TreeInput
       schema={schema}
-      collapsed={true}
+      collapsed={2}
       onChange={console.log}
       rootName="ROOT"
   />
