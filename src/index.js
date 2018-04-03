@@ -99,7 +99,7 @@ class TreeInput extends Component {
     onChange = (e, value) => {
       this.setState({ value });
       const formated = TreeInput.format(value, this.props.filterEmpty);
-      this.props.onChange(formated, value);
+      this.props.onChange(e, formated, value);
       // console.log(formated);
       // console.log(JSON.parse(formated));
     };

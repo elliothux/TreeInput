@@ -1,6 +1,6 @@
 {
   "name": "tree-input",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "./dist",
   "repository": "https://github.com/HuQingyang/TreeInput",
   "author": "胡青杨 <i@do.codes>",
@@ -8,6 +8,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot --inline --cache --devtool eval --port 2333",
     "build": "webpack",
+    "example": "webpack-dev-server --config ./example/webpack.config.js --open",
     "lint": "eslint ./",
     "lintfix": "eslint ./ --fix"
   },
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-loader": "^7.1.4",
     "babel-plugin-jsx-if-directive": "0.0.7",
@@ -36,8 +38,8 @@
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
     "url-loader": "^1.0.1",
-    "webpack": "^3.11.0",
+    "webpack": "3.11.0",
     "webpack-cli": "^2.0.12",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-dev-server": "2.9.4"
   }
 }

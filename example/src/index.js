@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { TreeInput } from '../../src';
+import { TreeInput } from '../../';
 
 import './index.scss';
 
@@ -128,12 +128,6 @@ const schema = [
   {
     tag: 5, name: 'end_time', label: 'OPTIONAL', type: 'uint64', value: '1520321391',
   }, {
-    tag: 6,
-    name: 'limit_count',
-    label: 'OPTIONAL',
-    type: 'uint32',
-    value: '3',
-  }, {
     tag: 7,
     fieldInfo: [{
       tag: 1, name: 'rule_type', label: 'OPTIONAL', type: 'uint32', value: '3',
@@ -172,8 +166,6 @@ const schema = [
       type: 'uint32',
       value: '100',
     }, {
-      tag: 11, name: 'platform', label: 'OPTIONAL', type: 'uint32',
-    }, {
       tag: 12,
       name: 'version',
       label: 'OPTIONAL',
@@ -184,28 +176,16 @@ const schema = [
     name: 'rule',
     label: 'OPTIONAL',
     type: 'message',
-  }, {
-    tag: 8,
-    fieldInfo: [{
-      tag: 1, name: 'activity_url', label: 'OPTIONAL', type: 'string',
-    }],
-    name: 'ext_config',
-    label: 'OPTIONAL',
-    type: 'message',
-  }, {
-    tag: 9, name: 'has_preview', label: 'OPTIONAL', type: 'uint32', value: '1',
-  }, {
-    tag: 10,
-    name: 'preview_day_num',
-    label: 'OPTIONAL',
-    type: 'uint32',
-  }, {
-    tag: 11, name: 'preview_time', label: 'OPTIONAL', type: 'uint32', value: '1519958614',
   }];
 
 
 const App = () => (
-  <TreeInput schema={schema} collapsed={2} />
+  <TreeInput
+      schema={schema}
+      collapsed={2}
+      onChange={console.log}
+      rootName="ROOT"
+  />
 );
 
 const container = document.createElement('div');

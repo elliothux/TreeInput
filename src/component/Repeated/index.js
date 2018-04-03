@@ -161,7 +161,7 @@ class Repeated extends Component {
           >
             <Icon type="COLLAPSED" className="tree-input-expand" />
             <div className="tree-input-name">
-              <span>${`"${name}": `}</span>
+              <span>{`"${name}": `}</span>
               <Tooltip text={documentation} />
             </div>
             <span className="tree-input-item-type"> {isMessage ? 'message' : typeOrFieldInfo}[]</span>
