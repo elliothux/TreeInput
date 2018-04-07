@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { TreeInput } from '../../';
+import { TreeInput, format } from '../../src';
 
 import './index.scss';
 
