@@ -70,11 +70,11 @@ function format(rawValue, filterEmpty) {
 
 
 function formatToJS(rawValue, filterEmpty) {
-  return format(rawValue, filterEmpty);
+  return JSON.parse(format(rawValue, filterEmpty));
 }
 
 
 export {
   format,
-  formatToJS,
+  formatToJS
 };
