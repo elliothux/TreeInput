@@ -1,4 +1,7 @@
 
+import { format, formatToJS } from './format';
+
+
 const noop = () => {};
 
 const types = [
@@ -55,4 +58,6 @@ export {
   noop,
   preventDefault,
   deepCopy,
+  format,
+  formatToJS
 };

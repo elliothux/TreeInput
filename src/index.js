@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Message from './component/Message';
-import { noop, typesMap } from './utils';
+import { noop, format, formatToJS } from './utils';
 
 import './index.scss';
-
-const EMPTY = {};
 
 
 class TreeInput extends Component {
@@ -15,77 +13,13 @@ class TreeInput extends Component {
       rootName: PropTypes.string,
       collapsed: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
       onChange: PropTypes.func,
-      filterEmpty: PropTypes.bool,
       // warnEmpty: PropTypes.bool,
     };
     static defaultProps = {
       rootName: 'Root',
       collapsed: true,
       onChange: noop,
-      filterEmpty: true,
       // warnEmpty: false,
-    };
-
-    // Format Value to JSON
-    static format = (rawValue, filterEmpty) => {
-      const formated = rawValue.map((i) => {
-        const {
-          name, type, label, value, fieldInfo,
-        } = i;
-        let v;
-
-        if (label === 'REPEATED') {
-          if (!value || value.length === 0) {
-            return EMPTY;
-          }
-          v = TreeInput.formatRepeated(
-            value,
-            type === 'message' ? fieldInfo : type,
-            filterEmpty
-          );
-          if (v === '[]' && filterEmpty) {
-            return EMPTY;
-          }
-        } else if (type === 'message') {
-          v = TreeInput.format(fieldInfo, filterEmpty);
-          if (v === '{}' && filterEmpty) {
-            return EMPTY;
-          }
-        } else {
-          if (filterEmpty && [undefined, null, ''].includes(value)) {
-            return EMPTY;
-          }
-          if (value === undefined) {
-            v = 'null';
-          } else {
-            v = TreeInput.formatSingle(value, type);
-          }
-        }
-        return `"${name}":${v}`;
-      }).filter(i => i !== EMPTY).join(',');
-      return `{${formated}}`;
-    };
-    static formatRepeated = (value, typeOrFieldInfo, filterEmpty) => {
-      if (typeof typeOrFieldInfo === 'string') {
-        value = value
-          .map(v => TreeInput.formatSingle(v, typeOrFieldInfo))
-          .filter(v => !!v)
-          .join(',');
-      } else {
-        value = value
-          .map(v => TreeInput.format(v, filterEmpty))
-          .filter(v => v !== '{}')
-          .join(',');
-      }
-      return `[${value}]`;
-    };
-    static formatSingle = (value, type) => {
-      if ([typesMap.BYTES, typesMap.STRING].includes(type)) {
-        return `"${value}"`;
-      } else if (type === typesMap.ENUM) {
-        return typeof value === 'string' ? `"${value}"` : `${value}`;
-      }
-      return `${value}`;
     };
 
     constructor(...args) {
@@ -98,10 +32,7 @@ class TreeInput extends Component {
 
     onChange = (e, value) => {
       this.setState({ value });
-      const formated = TreeInput.format(value, this.props.filterEmpty);
-      this.props.onChange(e, formated, value);
-      // console.log(formated);
-      // console.log(JSON.parse(formated));
+      this.props.onChange(e, value);
     };
 
     render() {
@@ -119,10 +50,9 @@ class TreeInput extends Component {
     }
 }
 
-const { format } = TreeInput;
-
 
 export {
   TreeInput,
   format,
+  formatToJS
 };
