@@ -54,5 +54,5 @@ class TreeInput extends Component {
 export {
   TreeInput,
   format,
-  formatToJS
+  formatToJS,
 };

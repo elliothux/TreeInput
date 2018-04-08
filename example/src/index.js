@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { TreeInput, format } from '../../src';
+import { TreeInput, format, formatToJS } from '../../';
 
 import './index.scss';
 
@@ -17,7 +17,7 @@ const schema = [
   {
     tag: 2,
     name: 'uid_type',
-    documentation: '用户类型\r',
+    documentation: '用户类型',
     label: 'OPTIONAL',
     type: 'int32',
   },
@@ -27,34 +27,34 @@ const schema = [
       {
         tag: 1,
         name: 'aid',
-        documentation: '机构id\r',
+        documentation: '机构id',
         label: 'OPTIONAL',
         type: 'string',
       },
       {
         tag: 2,
         name: 'cid',
-        documentation: '课程id\r',
+        documentation: '课程id',
         label: 'OPTIONAL',
         type: 'string',
       },
       {
         tag: 3,
         name: 'name',
-        documentation: '课程名称\r',
+        documentation: '课程名称',
         label: 'OPTIONAL',
         type: 'string',
       },
       {
         tag: 4,
         name: 'tid',
-        documentation: '班级id\r',
+        documentation: '班级id',
         label: 'REPEATED',
         type: 'string',
       },
     ],
     name: 'course_info',
-    documentation: '课程信息\r',
+    documentation: '课程信息',
     label: 'OPTIONAL',
     type: 'message',
   },
@@ -106,13 +106,13 @@ const schema = [
   },
   {
     tag: 3,
-    fieldInfo: [{ tag: 0, name: 'SIMPLE_TRIGGER', documentation: '定时任务\r' }, {
+    fieldInfo: [{ tag: 0, name: 'SIMPLE_TRIGGER', documentation: '定时任务' }, {
       tag: 1,
       name: 'CRON_TRIGGER',
-      documentation: 'CRON 表达式任务\r',
-    }, { tag: 2, name: 'DELAY_TRIGGER', documentation: '延时任务\r' }],
+      documentation: 'CRON 表达式任务',
+    }, { tag: 2, name: 'DELAY_TRIGGER', documentation: '延时任务' }],
     name: 'triggerType',
-    documentation: '定时器类型\r',
+    documentation: '定时器类型',
     label: 'REQUIRED',
     type: 'enum',
   },
@@ -178,13 +178,21 @@ const schema = [
     type: 'message',
   }];
 
+function handleChange(e, rawValue) {
+  // Filter empty value
+  const filterEmpty = true;
+  // format to json string
+  console.log(format(rawValue, filterEmpty));
+  // format to js object
+  console.log(formatToJS(rawValue, filterEmpty));
+}
 
 const App = () => (
   <TreeInput
-      schema={schema}
-      collapsed={2}
-      onChange={console.log}
-      rootName="ROOT"
+    schema={schema}
+    collapsed={2}
+    onChange={handleChange}
+    rootName="ROOT"
   />
 );
 

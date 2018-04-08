@@ -59,5 +59,5 @@ export {
   preventDefault,
   deepCopy,
   format,
-  formatToJS
+  formatToJS,
 };
