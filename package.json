@@ -1,6 +1,6 @@
 {
   "name": "tree-input",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./dist",
   "repository": "https://github.com/HuQingyang/TreeInput",
   "author": "胡青杨 <i@do.codes>",
