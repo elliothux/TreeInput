@@ -1,6 +1,8 @@
 # TreeInput
 A TreeInput Component for React
 
+![](https://travis-ci.org/HuQingyang/TreeInput.svg?branch=master)
+
 ## Features
 * Using schema to generate complex nested forms easily
 * Stringify all kinds of types including **64bit numbers**
