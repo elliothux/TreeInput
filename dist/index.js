@@ -2663,7 +2663,7 @@ module.exports = function() {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.formatToJS = exports.format = undefined;
 
@@ -2672,73 +2672,84 @@ var _ = __webpack_require__(4);
 var EMPTY = {};
 
 function formatSingle(value, type) {
-  if ([_.typesMap.BYTES, _.typesMap.STRING].includes(type)) {
-    return '"' + value + '"';
-  } else if (type === _.typesMap.ENUM) {
-    return typeof value === 'string' ? '"' + value + '"' : '' + value;
-  }
-  return '' + value;
+    if ([_.typesMap.BYTES, _.typesMap.STRING].includes(type)) {
+        return '"' + value.replace(/"/g, "\\\"") + '"';
+    } else if (type === _.typesMap.ENUM) {
+        return typeof value === 'string' ? '"' + value + '"' : '' + value;
+    }
+    return '' + value;
 }
 
 function formatRepeated(value, typeOrFieldInfo, filterEmpty) {
-  if (typeof typeOrFieldInfo === 'string') {
-    value = value.map(function (v) {
-      return formatSingle(v, typeOrFieldInfo);
-    }).filter(function (v) {
-      return !!v;
-    }).join(',');
-  } else {
-    value = value.map(function (v) {
-      return format(v, filterEmpty);
-    }).filter(function (v) {
-      return v !== '{}';
-    }).join(',');
-  }
-  return '[' + value + ']';
+    if (typeof typeOrFieldInfo === 'string') {
+        value = value.map(function (v) {
+            return formatSingle(v, typeOrFieldInfo);
+        }).filter(function (v) {
+            return !!v;
+        }).join(',');
+    } else {
+        value = value.map(function (v) {
+            return format(v, filterEmpty);
+        }).filter(function (v) {
+            return v !== '{}';
+        }).join(',');
+    }
+    return '[' + value + ']';
+}
+
+function formatEnum(value) {
+    console.log(value);
+    if (!value || !value[0]) return "";
+    return '"' + value[0].name + '"';
 }
 
 function format(rawValue, filterEmpty) {
-  var formated = rawValue.map(function (i) {
-    var name = i.name,
-        type = i.type,
-        label = i.label,
-        value = i.value,
-        fieldInfo = i.fieldInfo;
+    var formated = rawValue.map(function (i) {
+        var name = i.name,
+            type = i.type,
+            label = i.label,
+            value = i.value,
+            fieldInfo = i.fieldInfo;
 
-    var v = void 0;
+        var v = void 0;
 
-    if (label === 'REPEATED') {
-      if (!value || value.length === 0) {
-        return EMPTY;
-      }
-      v = formatRepeated(value, type === 'message' ? fieldInfo : type, filterEmpty);
-      if (v === '[]' && filterEmpty) {
-        return EMPTY;
-      }
-    } else if (type === 'message') {
-      v = format(fieldInfo, filterEmpty);
-      if (v === '{}' && filterEmpty) {
-        return EMPTY;
-      }
-    } else {
-      if (filterEmpty && [undefined, null, ''].includes(value)) {
-        return EMPTY;
-      }
-      if (value === undefined) {
-        v = 'null';
-      } else {
-        v = formatSingle(value, type);
-      }
-    }
-    return '"' + name + '":' + v;
-  }).filter(function (i) {
-    return i !== EMPTY;
-  }).join(',');
-  return '{' + formated + '}';
+        if (label === 'REPEATED') {
+            if (!value || value.length === 0) {
+                return EMPTY;
+            }
+            v = formatRepeated(value, type === 'message' ? fieldInfo : type, filterEmpty);
+            if (v === '[]' && filterEmpty) {
+                return EMPTY;
+            }
+        } else if (type === 'message') {
+            v = format(fieldInfo, filterEmpty);
+            if (v === '{}' && filterEmpty) {
+                return EMPTY;
+            }
+        } else if (type === 'enum') {
+            v = formatEnum(value, filterEmpty);
+            if (v === "" && filterEmpty) {
+                return EMPTY;
+            }
+        } else {
+            if (filterEmpty && [undefined, null, ''].includes(value)) {
+                return EMPTY;
+            }
+            if (value === undefined) {
+                v = 'null';
+            } else {
+                v = formatSingle(value, type);
+            }
+        }
+        return '"' + name + '":' + v;
+    }).filter(function (i) {
+        return i !== EMPTY;
+    }).join(',');
+    return '{' + formated + '}';
 }
 
 function formatToJS(rawValue, filterEmpty) {
-  return JSON.parse(format(rawValue, filterEmpty));
+    return JSON.parse(format(rawValue, filterEmpty));
 }
 
 exports.format = format;

@@ -6,7 +6,7 @@ const EMPTY = {};
 
 function formatSingle(value, type) {
     if ([typesMap.BYTES, typesMap.STRING].includes(type)) {
-        return `"${value}"`;
+        return `"${value.replace(/"/g, "\\\"")}"`;
     } else if (type === typesMap.ENUM) {
         return typeof value === 'string' ? `"${value}"` : `${value}`;
     }
@@ -29,6 +29,7 @@ function formatRepeated(value, typeOrFieldInfo, filterEmpty) {
 }
 
 function formatEnum(value) {
+    console.log(value);
     if (!value || !value[0]) return "";
     return `"${value[0].name}"`;
 }
