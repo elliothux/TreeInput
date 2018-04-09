@@ -8,7 +8,9 @@ function formatSingle(value, type) {
     if ([typesMap.BYTES, typesMap.STRING].includes(type)) {
         return `"${value.replace(/"/g, "\\\"")}"`;
     } else if (type === typesMap.ENUM) {
-        return typeof value === 'string' ? `"${value}"` : `${value}`;
+        return typeof value === 'string' ?
+          `"${value.replace(/"/g, "\\\"")}"` :
+          `${value}`;
     }
     return `${value}`;
 }
