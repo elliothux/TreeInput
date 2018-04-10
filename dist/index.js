@@ -2675,7 +2675,7 @@ function formatSingle(value, type) {
     if ([_.typesMap.BYTES, _.typesMap.STRING].includes(type)) {
         return '"' + value.replace(/"/g, "\\\"") + '"';
     } else if (type === _.typesMap.ENUM) {
-        return typeof value === 'string' ? '"' + value + '"' : '' + value;
+        return typeof value === 'string' ? '"' + value.replace(/"/g, "\\\"") + '"' : '' + value;
     }
     return '' + value;
 }
@@ -2698,9 +2698,8 @@ function formatRepeated(value, typeOrFieldInfo, filterEmpty) {
 }
 
 function formatEnum(value) {
-    console.log(value);
     if (!value || !value[0]) return "";
-    return '"' + value[0].name + '"';
+    return '"' + value[0].tag + '"';
 }
 
 function format(rawValue, filterEmpty) {

@@ -31,9 +31,8 @@ function formatRepeated(value, typeOrFieldInfo, filterEmpty) {
 }
 
 function formatEnum(value) {
-    console.log(value);
     if (!value || !value[0]) return "";
-    return `"${value[0].name}"`;
+    return `"${value[0].tag}"`;
 }
 
 function format(rawValue, filterEmpty) {
