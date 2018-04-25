@@ -11,7 +11,7 @@ const schema = [{
     "tag": 1,
     "name": "uin",
     "documentation": "创建订单的uin\r",
-    "label": "OPTIONAL",
+    "label": "REQUIRED",
     "type": "uint64",
     "value": "381802924"
   }, {
@@ -31,7 +31,7 @@ const schema = [{
     "tag": 6,
     "name": "cou_id",
     "documentation": "优惠券id\r",
-    "label": "OPTIONAL",
+    "label": "REQUIRED",
     "type": "string"
   }, {"tag": 7, "name": "cou_price", "documentation": "优惠券价格\r", "label": "OPTIONAL", "type": "uint32"}, {
     "tag": 8,
@@ -290,9 +290,8 @@ const schema = [{
     "name": "CREATE_TIME_DESC"
   }],
   "name": "order_by",
-  "label": "OPTIONAL",
+  "label": "REQUIRED",
   "type": "enum",
-  "value": [{"tag": 6, "name": "CREATE_TIME_DESC"}]
 }, {"tag": 4, "name": "page", "documentation": "from 0\r", "label": "OPTIONAL", "type": "uint32"}, {
   "tag": 5,
   "name": "count",
@@ -316,7 +315,6 @@ const schema = [{
     "name": "to",
     "label": "REQUIRED",
     "type": "uint64",
-    "value": "1510358400"
   }],
   "name": "range",
   "label": "OPTIONAL",
@@ -545,8 +543,8 @@ function handleChange(e, rawValue) {
 
 const App = () => (
   <TreeInput
-    schema={s}
-    collapsed={2}
+    schema={schema}
+    collapsed={false}
     onChange={handleChange}
     rootName="ROOT"
   />

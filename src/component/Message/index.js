@@ -8,7 +8,7 @@ import Boolean from '../Boolean';
 import Repeated from '../Repeated';
 import Tooltip from '../Tooltip';
 import Icon from '../Icon';
-import { noop, preventDefault } from '../../utils';
+import { noop, preventDefault, labelsMap } from '../../utils';
 
 import './index.scss';
 
@@ -62,11 +62,14 @@ class Message extends Component {
     };
     renderInput = (node) => {
       const {
-        name, type, value, documentation,
+        name, type, value, documentation, label
       } = node;
+      const isRequired = label === labelsMap.REQUIRED;
+      const isEmpty = ['', null, undefined].includes(value);
+      const showWarn = isRequired && isEmpty;
       return (
         <div
-          className={`tree-input-item ${type}`}
+          className={`tree-input-item${showWarn ? ' tree-input-warn' : ''} ${type}`}
           key={name}
         >
           <div className="tree-input-item-info">
@@ -89,11 +92,14 @@ class Message extends Component {
     };
     renderEnum = (node) => {
       const {
-        name, fieldInfo, value, documentation,
+        name, fieldInfo, value, documentation, label
       } = node;
+      const isRequired = label === labelsMap.REQUIRED;
+      const isEmpty = ['', null, undefined].includes(value);
+      const showWarn = isRequired && isEmpty;
       return (
         <div
-          className="tree-input-item enum"
+          className={`tree-input-item${showWarn ? ' tree-input-warn' : ''} enum`}
           key={name}
         >
           <div className="tree-input-item-info">
@@ -114,10 +120,13 @@ class Message extends Component {
       );
     };
     renderBoolean = (node) => {
-      const { name, value, documentation } = node;
+      const { name, value, documentation, label } = node;
+      const isRequired = label === labelsMap.REQUIRED;
+      const isEmpty = ['', null, undefined].includes(value);
+      const showWarn = isRequired && isEmpty;
       return (
         <div
-          className="tree-input-item boolean"
+          className={`tree-input-item${showWarn ? ' tree-input-warn' : ''} boolean`}
           key={name}
         >
           <div className="tree-input-item-info">

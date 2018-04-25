@@ -15,6 +15,30 @@
   .tree-input-hide {
     opacity: 0;
   }
+  .tree-input-warn {
+    & > input {
+      background-color: $warn-color;
+      border-color: $warn-color;
+      &:focus {
+        outline-color: $warn-color;
+      }
+      &::placeholder {
+        color: white;
+        opacity: 1;
+      }
+    }
+    .tree-input-item-enum-value {
+      background-color: $warn-color;
+      border-color: $warn-color;
+      span {
+        color: white;
+        opacity: 1;
+      }
+      .tree-input-item-expand-icon {
+        fill: white !important;
+      }
+    }
+  }
   .tree-input-name, .tree-input-item-name {
     .tree-input-tooltip {
       transform: scale(0.1) translateY(calc(-200% - 26px));

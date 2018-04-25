@@ -29,6 +29,14 @@ const typesMap = {
   ENUM: 'enum',
 };
 
+const labels = ["REQUIRED", "REPEATED", "OPTIONAL"];
+
+const labelsMap = {
+  REQUIRED: "REQUIRED",
+  REPEATED: "REPEATED",
+  OPTIONAL: "OPTIONAL"
+};
+
 
 function preventDefault(e) {
   if (e) {
@@ -60,4 +68,6 @@ export {
   deepCopy,
   format,
   formatToJS,
+  labels,
+  labelsMap
 };
